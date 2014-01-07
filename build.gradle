@@ -1,0 +1,29 @@
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    sourceCompatibility = 1.8
+
+    version = '0.0.1'
+
+    task wrapper(type: Wrapper) {
+        gradleVersion = '1.10'
+    }
+}
+
+subprojects {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    project.ext {
+        dropwizardVersion = '0.7.0-SNAPSHOT'
+        jacksonVersion = '2.2.3'
+        jacksonXmlProviderVersion = '2.1.5'
+    }
+
+
+}
+

@@ -1,5 +1,7 @@
-apply plugin: 'java'
 
-sourceCompatibility = 1.8
-version = '1.0'
+dependencies {
 
+    compile 'io.dropwizard:dropwizard-core:' + dropwizardVersion
+    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:' + jacksonVersion
+
+}

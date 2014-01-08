@@ -1,1 +1,1 @@
-include 'dropwizard-jackson-xml'
+include 'dropwizard-jersey-xml'

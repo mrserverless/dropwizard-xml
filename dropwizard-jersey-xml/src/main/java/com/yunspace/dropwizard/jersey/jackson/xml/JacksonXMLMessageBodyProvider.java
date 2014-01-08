@@ -1,7 +1,6 @@
 package com.yunspace.dropwizard.jersey.jackson.xml;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.jaxrs.xml.JacksonJaxbXMLProvider;
 import io.dropwizard.validation.ConstraintViolations;
@@ -28,10 +27,11 @@ import java.util.Set;
  * {@code @Valid} are validated, and an informative 422 Unprocessable Entity response is returned
  * should the entity be invalid.
  * <p/>
- * (Essentially, extends {@link com.fasterxml.jackson.jaxrs.xml.JacksonJaxbXMLProvider} with validation and support for
- * {@link com.fasterxml.jackson.annotation.JsonIgnoreType}.)
+ * (Essentially the same as {@link io.dropwizard.jersey.jackson.JacksonMessageBodyProvider} except it extends
+ * {@link com.fasterxml.jackson.jaxrs.xml.JacksonJaxbXMLProvider} and uses the
+ * {@link com.fasterxml.jackson.dataformat.xml.XmlMapper}
  *
- * Created by ylin2 on 7/01/14.
+ * Created by yun on 7/01/14.
  */
 public class JacksonXMLMessageBodyProvider extends JacksonJaxbXMLProvider {
 

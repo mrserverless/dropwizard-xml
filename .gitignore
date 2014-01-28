@@ -1,0 +1,17 @@
+.gradle
+atlassian-ide-plugin.xml
+logs
+
+#IntelliJ
+.idea
+build
+bin
+*.iml
+*.ipr
+*.iws
+
+#Eclipse-specific
+.settings/
+.classpath
+.project
+target

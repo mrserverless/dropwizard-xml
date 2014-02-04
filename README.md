@@ -1,4 +1,4 @@
-#Dropwizard + XML
+#Dropwizard XML Provider
 [Dropwizard](https://github.com/dropwizard/dropwizard) extension for high performance processing of XML inputs and outputs
 
 Uses:

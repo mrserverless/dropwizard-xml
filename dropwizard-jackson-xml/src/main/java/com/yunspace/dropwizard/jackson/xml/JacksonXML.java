@@ -28,7 +28,6 @@ public class JacksonXML {
         final XmlFactory woodstoxFactory = new XmlFactory(new WstxInputFactory(), new WstxOutputFactory());
         final XmlMapper mapper = new XmlMapper (woodstoxFactory, new JacksonXmlModule());
 
-        mapper.enable(SerializationFeature.INDENT_OUTPUT); //TODO make indentation configurable
         mapper.registerModule(new LogbackModule()); //logging
         mapper.registerModule(new JodaModule()); //joda-teim
         mapper.registerModule(new FuzzyEnumModule()); // deserializing enums

@@ -1,7 +1,0 @@
-
-dependencies {
-
-    compile 'io.dropwizard:dropwizard-core:' + dropwizardVersion
-    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:' + jacksonVersion
-
-}

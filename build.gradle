@@ -4,7 +4,7 @@ allprojects {
     apply plugin: 'maven'
 
     group = 'com.yunspace.dropwizard'
-    version = '0.2.0'
+    version = '0.4.0'
 
     task wrapper(type: Wrapper) {
         gradleVersion = '1.10'
@@ -18,13 +18,11 @@ subprojects {
 
     repositories {
         mavenLocal()
-        maven {
-            url 'http://sdlc/nexus/content/groups/public'
-        }
+        mavenCentral()
     }
 
     project.ext {
-        dropwizardVersion = '0.7.0-SNAPSHOT'
+        dropwizardVersion = '0.7.0-rc1'
         jacksonVersion = '2.3.0'
         xmlProviderVersion = '2.1.5'
         woodstoxVersion = '4.2.0'

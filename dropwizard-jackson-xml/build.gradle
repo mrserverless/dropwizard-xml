@@ -1,10 +1,14 @@
 
 dependencies {
-
+    //dropwizard
     compile 'io.dropwizard:dropwizard-jersey:' + dropwizardVersion
     compile 'io.dropwizard:dropwizard-validation:' + dropwizardVersion
+
+    //jackson
     compile 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider:' + xmlProviderVersion
     compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:' + jacksonVersion
+
+    //woodstox
     compile 'org.codehaus.woodstox:woodstox-core-asl:' + woodstoxVersion
     compile 'org.codehaus.woodstox:stax2-api:' + woodstoxStaxVersion
 }

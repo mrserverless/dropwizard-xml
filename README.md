@@ -2,8 +2,8 @@
 [Dropwizard](https://github.com/dropwizard/dropwizard) extension for high performance processing of XML inputs and outputs
 
 Uses:
-* [Jackson XML Provider](https://github.com/FasterXML/jackson-jaxrs-xml-provider) for JAX-RS MessageBodyReader and MessageBodyWriter implementation
-* [Jackson DataFormat XML](https://github.com/FasterXML/jackson-dataformat-xml) for XMLMapper, equivalent to ObjectMapper in JSON
+* [Jackson XML Provider](https://github.com/FasterXML/jackson-jaxrs-xml-provider) for JAX-RS MessageBodyReader and MessageBodyWriter implementations
+* [Jackson DataFormat XML](https://github.com/FasterXML/jackson-dataformat-xml) for XMLMapper, which inherits from the Jackson ObjectMapper
 * [Woodstox](http://wiki.fasterxml.com/WoodstoxHome) for high performance XML processing under the hood
 * [Gradle](http://www.gradle.org/) for the best of Ant plus Maven minus all the crap.
 

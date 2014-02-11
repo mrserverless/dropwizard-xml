@@ -11,8 +11,11 @@ Uses:
 Dropwizard is fast, container-less and JSON is awesome. But understandably, XML files are deeply rooted into the IT ecosystem of many organisations. It would be great if the power and simplicity of Dropwizard to build XML RESTful web services, instead of relying on bloated frameworks and chunky application servers. That's what this project aims to do.
 
 ##Noteworthy
-Dropwizard-xml is compatible with Dropwizard 0.7.0-SNAPSHOT and above only. Dropwizard 0.7 uses Jackson 2.2.3. The previous Dropwizard release uses Jackson 2.1.4 which contains a show stopper bug with XML unwrapped lists. See jackson-dataformat-xml
+Dropwizard-xml is compatible with Dropwizard 0.7.0-rc1 and above only. Dropwizard 0.7 uses Jackson 2.3.0. The previous Dropwizard release uses Jackson 2.1.4 which contains a show stopper bug with XML unwrapped lists. See jackson-dataformat-xml
 [ISSUE-58](https://github.com/FasterXML/jackson-dataformat-xml/issues/58)
+
+For unwrapped lists containing elements with multiple attributes, it's easier to use JAXB annotation.
+[ISSUE-101](https://github.com/FasterXML/jackson-dataformat-xml/issues/101)
 
 Certain configurations such as Indentation are switched on by default. Will attempt to make these configurable in the
 future.

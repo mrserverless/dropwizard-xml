@@ -2,6 +2,7 @@ package com.yunspace.dropwizard.jersey.jackson.xml;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -10,7 +11,6 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import com.sun.jersey.core.util.StringKeyObjectValueIgnoreCaseMultivaluedMap;
 import com.yunspace.dropwizard.jackson.xml.JacksonXML;
-import com.yunspace.dropwizard.jersey.jackson.xml.JacksonXMLMessageBodyProvider;
 import io.dropwizard.validation.ConstraintViolations;
 import io.dropwizard.validation.Validated;
 import org.fest.assertions.api.Assertions;
@@ -115,6 +115,7 @@ public class JacksonXMLMessageBodyProviderTest {
     @Before
     public void setUp() throws Exception {
         Assume.assumeThat(Locale.getDefault().getLanguage(), CoreMatchers.is("en"));
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
     @Test

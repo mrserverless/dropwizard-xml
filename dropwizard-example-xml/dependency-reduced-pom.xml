@@ -55,7 +55,7 @@
               <transformers>
                 <transformer />
                 <transformer>
-                  <mainClass>com.example.helloworld.HelloWorldApplication</mainClass>
+                  <mainClass>com.yunspace.helloxml.HelloXmlApplication</mainClass>
                 </transformer>
               </transformers>
             </configuration>

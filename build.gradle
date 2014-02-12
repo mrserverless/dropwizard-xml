@@ -4,7 +4,7 @@ allprojects {
     apply plugin: 'maven'
 
     group = 'com.yunspace.dropwizard'
-    version = '0.4.0'
+    version = '0.5.0-SNAPSHOT'
 
     task wrapper(type: Wrapper) {
         gradleVersion = '1.10'
@@ -14,7 +14,8 @@ allprojects {
 subprojects {
     apply plugin: 'java'
 
-    sourceCompatibility = 1.8
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
 
     repositories {
         mavenLocal()
@@ -23,14 +24,9 @@ subprojects {
 
     project.ext {
         dropwizardVersion = '0.7.0-rc1'
-        jacksonVersion = '2.3.0'
-        xmlProviderVersion = '2.1.5'
-        woodstoxVersion = '4.2.0'
-        woodstoxStaxVersion = '3.1.1'
     }
 
     dependencies {
-
         testCompile 'org.mockito:mockito-all:1.9.5'
         testCompile 'org.easytesting:fest-assert-core:2.0M10'
         testCompile 'junit:junit:4.11'

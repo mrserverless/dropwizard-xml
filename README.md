@@ -1,4 +1,4 @@
-#Dropwizard XML Provider
+# Dropwizard XML Provider
 [Dropwizard](https://github.com/dropwizard/dropwizard) extension for high performance processing of XML inputs and outputs
 
 Uses:
@@ -7,10 +7,10 @@ Uses:
 * [Woodstox](http://wiki.fasterxml.com/WoodstoxHome) for high performance XML processing under the hood
 * [Gradle](http://www.gradle.org/) for the best of Ant plus Maven IMHO.
 
-##Why
+## Why
 Dropwizard is fast, container-less and JSON is awesome. But understandably, XML files are deeply rooted into the IT ecosystem of many organisations. It would be great if the power and simplicity of Dropwizard to build XML RESTful web services, instead of relying on bloated frameworks and chunky application servers. That's what this project aims to do.
 
-##Noteworthy
+## Noteworthy
 Dropwizard-xml is compatible with Dropwizard 0.7.0-rc1 and above only. Dropwizard 0.7 uses Jackson 2.3.0. The previous Dropwizard release uses Jackson 2.1.4 which contains a show stopper bug with XML unwrapped lists. See jackson-dataformat-xml
 [ISSUE-58](https://github.com/FasterXML/jackson-dataformat-xml/issues/58)
 
@@ -20,7 +20,7 @@ For unwrapped lists containing elements with multiple attributes, it's easier to
 Certain configurations such as Indentation are switched on by default. Will attempt to make these configurable in the
 future.
 
-##Usage
+## Usage
 Unfortunately there is no maven repository yet. For now, simply download the project, run gradlew or gradlew.bat to compile and install to your local maven repository:
 
     gradlew install

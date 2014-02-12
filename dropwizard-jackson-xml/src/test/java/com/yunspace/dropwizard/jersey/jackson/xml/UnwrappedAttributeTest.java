@@ -1,22 +1,19 @@
 package com.yunspace.dropwizard.jersey.jackson.xml;
 
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.jaxrs.xml.JacksonJaxbXMLProvider;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import com.sun.jersey.core.util.StringKeyObjectValueIgnoreCaseMultivaluedMap;
 import com.yunspace.dropwizard.jackson.xml.JacksonXML;
-import org.junit.Before;
 import org.junit.Test;
 
+import javax.validation.Validation;
 import javax.ws.rs.core.MediaType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.lang.annotation.Annotation;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.fest.assertions.api.Assertions.assertThat;
@@ -31,49 +28,32 @@ import static org.fest.assertions.api.Assertions.assertThat;
 public class UnwrappedAttributeTest {
     private static final Annotation[] NONE = new Annotation[0];
 
-    @XmlRootElement(name = "root")
+    //@XmlAccessorType(XmlAccessType.FIELD)
+    @JacksonXmlRootElement(localName = "root")
+    //@XmlRootElement(name = "root")
     static class Root {
 
+//        @JacksonXmlProperty(localName = "unwrapped")
+//        @JacksonXmlElementWrapper(useWrapping = false)
         @XmlElement(name = "unwrapped")
         public List<UnwrappedElement> unwrapped;
 
-        @XmlElement(name = "name")
+        @JacksonXmlProperty(localName = "name")
         public String name;
 
         public static class UnwrappedElement {
-            public UnwrappedElement () {}
-
-            public UnwrappedElement (String id, String type) {
-                this.id = id;
-                this.type = type;
-            }
-
-            @XmlAttribute(name = "id")
+            @JacksonXmlProperty(isAttribute = true)
             public String id;
 
-            @XmlAttribute(name = "type")
+            @JacksonXmlProperty(isAttribute = true)
             public String type;
         }
     }
 
     protected final static XmlMapper xmlMapper = JacksonXML.newXMLMapper();
-    protected final static JacksonJaxbXMLProvider provider = new JacksonJaxbXMLProvider(xmlMapper, JacksonJaxbXMLProvider.DEFAULT_ANNOTATIONS);
-    protected final String rootXml = "<root>"  + System.lineSeparator() +
-            "  <unwrapped id=\"1\" type=\"string\"/>"  + System.lineSeparator() +
-            "  <unwrapped id=\"2\" type=\"string\"/>"  + System.lineSeparator() +
-            "  <name>text</name>"  + System.lineSeparator() +
-            "</root>";
+    protected final static JacksonXMLMessageBodyProvider provider = new JacksonXMLMessageBodyProvider(xmlMapper, Validation.buildDefaultValidatorFactory().getValidator());
+    protected final String rootXml = "<root><unwrapped id=\"1\" type=\"string\"/><unwrapped id=\"2\" type=\"string\"/><name>text</name></root>";
     protected final Root rootObject = new Root();
-
-    @Before
-    public void setUp() {
-        xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        rootObject.unwrapped = Arrays.asList(
-                new Root.UnwrappedElement("1", "string"),
-                new Root.UnwrappedElement("2", "string")
-        );
-        rootObject.name = "text";
-    }
 
 
     @Test
@@ -87,14 +67,11 @@ public class UnwrappedAttributeTest {
                 new MultivaluedMapImpl(),
                 requestList);
 
-        assertThat(obj).isInstanceOf(Root.class);
-        Root root = (Root) obj;
-        assertThat(root).isEqualsToByComparingFields(rootObject);
     }
 
     @Test
     public void serializeTest () throws Exception {
-
+        Root root = xmlMapper.readValue(rootXml, Root.class);
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         final Class<?> klass = Root.class;
 
@@ -106,7 +83,7 @@ public class UnwrappedAttributeTest {
                 new StringKeyObjectValueIgnoreCaseMultivaluedMap(),
                 output);
 
-        assertThat(output.toString()).isEqualTo(rootXml);
+        assertThat(root).isEqualsToByComparingFields(rootObject);
     }
 
 }

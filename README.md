@@ -39,6 +39,7 @@ Annotate your model POJO with either Jackson bindings:
     @JacksonXmlRootElement
     @JacksonXmlProperty
     @JacksonXmlElementWrapper
+    @JacksonXmlText
 
 or JAXB:
 

@@ -5,7 +5,7 @@ Uses:
 * [Jackson XML Provider](https://github.com/FasterXML/jackson-jaxrs-xml-provider) for JAX-RS MessageBodyReader and MessageBodyWriter implementations
 * [Jackson DataFormat XML](https://github.com/FasterXML/jackson-dataformat-xml) for XMLMapper, which inherits from the Jackson ObjectMapper
 * [Woodstox](http://wiki.fasterxml.com/WoodstoxHome) for high performance XML processing under the hood
-* [Gradle](http://www.gradle.org/) for the best of Ant plus Maven minus all the crap.
+* [Gradle](http://www.gradle.org/) for the best of Ant plus Maven IMHO.
 
 ##Why
 Dropwizard is fast, container-less and JSON is awesome. But understandably, XML files are deeply rooted into the IT ecosystem of many organisations. It would be great if the power and simplicity of Dropwizard to build XML RESTful web services, instead of relying on bloated frameworks and chunky application servers. That's what this project aims to do.
@@ -21,7 +21,7 @@ Certain configurations such as Indentation are switched on by default. Will atte
 future.
 
 ##Usage
-Unfortunately there is no maven repository yet. For now, simply download the project, run gradle or gradle wrapper to compile and install to your local maven repository:
+Unfortunately there is no maven repository yet. For now, simply download the project, run gradlew or gradlew.bat to compile and install to your local maven repository:
 
     gradlew install
 
@@ -29,9 +29,27 @@ To use the XML Provider, simply register it in your Application.Run() method:
 
     env.jersey().register(new JacksonXMLMessageBodyProvider(JacksonXML.newXMLMapper(), env.getValidator()));
 
-Don't forget to annotate your Resources accordingly with XML mediatype:
+Annotate your Resources accordingly with XML mediatype:
 
     @Produces(MediaType.APPLICATION_XML)
     @Consumes(MediaType.APPLICATION_XML)
+
+Annotate your model POJO with either Jackson bindings:
+
+    @JacksonXmlRootElement
+    @JacksonXmlProperty
+    @JacksonXmlElementWrapper
+
+or JAXB:
+
+    @XmlType
+    @XmlAttribute
+    etc
+
+And you can use the same validator annotations as you would with a JSON POJO when working with Dropwizard:
+
+    @NotNull
+    @Min
+    etc
 
 Sample project coming soon.

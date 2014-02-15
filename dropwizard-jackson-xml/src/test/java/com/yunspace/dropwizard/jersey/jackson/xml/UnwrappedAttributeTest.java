@@ -15,16 +15,15 @@ import java.util.List;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 /**
- * this test is created to show that it is easier to use JAXB to annotate
- * unwrapped lists instead of Jackson due to issue:
- * https://github.com/FasterXML/jackson-dataformat-xml/issues/101
+ * this test is created for Jackson Dataformat XML
+ * <a href="https://github.com/FasterXML/jackson-dataformat-xml/issues/101">Issue 101</a>
  *
  */
 
 public class UnwrappedAttributeTest {
 
     @JacksonXmlRootElement(localName = "root")
-    public class Root {
+    public static class Root {
 
         public Root() {}
 
@@ -32,16 +31,16 @@ public class UnwrappedAttributeTest {
         @JacksonXmlElementWrapper(useWrapping = false)
         public List<UnwrappedElement> unwrapped;
 
-        @JacksonXmlProperty(localName = "name")
-        public String name;
+        @JacksonXmlProperty(localName = "unwrapped")
+        public String name2;
 
     }
 
     @JacksonXmlRootElement(localName = "unwrapped")
-    public class UnwrappedElement {
+    public static class UnwrappedElement {
 
         public UnwrappedElement() {
-
+            // for Jackson deserialization
         }
 
         public UnwrappedElement (String id, String name) {
@@ -59,9 +58,8 @@ public class UnwrappedAttributeTest {
     protected final XmlMapper xmlMapper = new XmlMapper();
     protected final String rootXml =
             "<root>"  + System.lineSeparator() +
-            "  <unwrapped id=\"1\" name=\"string\"/>"  + System.lineSeparator() +
-            "  <unwrapped id=\"2\" name=\"string\"/>"  + System.lineSeparator() +
-            "  <name>text</name>"  + System.lineSeparator() +
+                    "  <unwrapped id=\"1\" name=\"string\"/>"  + System.lineSeparator() +
+                    "  <name2>text</name2>"  + System.lineSeparator() +
             "</root>";
 
     protected final Root rootObject = new Root();
@@ -71,10 +69,9 @@ public class UnwrappedAttributeTest {
         xmlMapper.enable(SerializationFeature.INDENT_OUTPUT).registerModule(new JaxbAnnotationModule());
 
         rootObject.unwrapped = Arrays.asList(
-                new UnwrappedElement("1", "string"),
-                new UnwrappedElement("2", "string")
+                new UnwrappedElement("1", "string")
         );
-        rootObject.name = "text";
+        rootObject.name2 = "text";
     }
 
     @Test
@@ -85,7 +82,7 @@ public class UnwrappedAttributeTest {
     @Test
     public void derializeTest () throws Exception {
 
-        Root rootResult = (Root) xmlMapper.readValue(rootXml, Root.class);
+        Root rootResult =  xmlMapper.readValue(rootXml, Root.class);
 
         assertThat(rootResult).isEqualsToByComparingFields(rootObject);
     }

@@ -1,15 +1,17 @@
 package com.yunspace.helloxml;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.yunspace.dropwizard.jackson.xml.JacksonXML;
-import com.yunspace.helloxml.core.Player;
-import com.yunspace.helloxml.db.PlayerDAO;
-import com.yunspace.helloxml.resources.CharacterResource;
-import com.yunspace.helloxml.resources.PlayerResource;
+import com.yunspace.dropwizard.jersey.jackson.xml.JacksonXMLMessageBodyProvider;
+import com.yunspace.helloxml.core.Pirate;
+import com.yunspace.helloxml.core.Ship;
+import com.yunspace.helloxml.db.PirateDAO;
+import com.yunspace.helloxml.db.ShipDAO;
+import com.yunspace.helloxml.resources.PirateResource;
+import com.yunspace.helloxml.resources.ShipResource;
 import io.dropwizard.Application;
-import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.migrations.MigrationsBundle;
@@ -22,7 +24,7 @@ public class HelloXmlApplication extends Application<HelloXmlConfiguration> {
     }
 
     private final HibernateBundle<HelloXmlConfiguration> hibernateBundle =
-            new HibernateBundle<HelloXmlConfiguration>(Player.class) {
+            new HibernateBundle<HelloXmlConfiguration>(Pirate.class, Ship.class) {
                 @Override
                 public DataSourceFactory getDataSourceFactory(HelloXmlConfiguration configuration) {
                     return configuration.getDataSourceFactory();
@@ -37,7 +39,6 @@ public class HelloXmlApplication extends Application<HelloXmlConfiguration> {
     @Override
     public void initialize(Bootstrap<HelloXmlConfiguration> bootstrap) {
 
-        bootstrap.addBundle(new AssetsBundle());
         bootstrap.addBundle(new MigrationsBundle<HelloXmlConfiguration>() {
             @Override
             public DataSourceFactory getDataSourceFactory(HelloXmlConfiguration configuration) {
@@ -51,13 +52,24 @@ public class HelloXmlApplication extends Application<HelloXmlConfiguration> {
     public void run(HelloXmlConfiguration configuration,
                     Environment environment) throws ClassNotFoundException {
 
-        JacksonXmlModule jacksonXmlModule = new JacksonXmlModule();
-        jacksonXmlModule.setDefaultUseWrapper(false); // default to unwrapped lists
-        XmlMapper mapper = JacksonXML.newXMLMapper(jacksonXmlModule);
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        //register xml provider
+        environment.jersey().register(new JacksonXMLMessageBodyProvider(configureMapper(), environment.getValidator()));
 
-        final PlayerDAO dao = new PlayerDAO(hibernateBundle.getSessionFactory());
-        environment.jersey().register(new PlayerResource(dao));
-        environment.jersey().register(new CharacterResource(dao));
+        final PirateDAO pirateDAO = new PirateDAO(hibernateBundle.getSessionFactory());
+        final ShipDAO shipDAO = new ShipDAO(hibernateBundle.getSessionFactory());
+        environment.jersey().register(new PirateResource(pirateDAO));
+        environment.jersey().register(new ShipResource(shipDAO));
+    }
+
+    /**
+     * configures the XMLMapper based on requirements
+     * @return xmlMapper
+     */
+    private XmlMapper configureMapper () {
+        XmlMapper xmlMapper = JacksonXML.newXMLMapper();        // also accepts JacksonXmlModule as input
+        xmlMapper.enable(SerializationFeature.INDENT_OUTPUT).               // turn on indenting
+                setSerializationInclusion(JsonInclude.Include.NON_NULL);    // ignore null elements
+
+        return xmlMapper;
     }
 }

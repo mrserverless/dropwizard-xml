@@ -11,12 +11,13 @@ buildscript {
 
 apply plugin: 'shadow'
 apply plugin: 'application'
+apply plugin: 'groovy'
 
 mainClassName = 'com.yunspace.helloxml.HelloXmlApplication'
 
 project.ext {
     h2Version = '1.3.175'
-    dropWizardConfig = './src/main/resources/helloxml.yml'
+    dropWizardConfig = 'helloxml.yml'
 }
 
 
@@ -38,9 +39,6 @@ dependencies {
 
     //dropwizard
     compile 'io.dropwizard:dropwizard-core:' + dropwizardVersion
-    compile 'io.dropwizard:dropwizard-auth:' + dropwizardVersion
-    compile 'io.dropwizard:dropwizard-assets:' + dropwizardVersion
-    compile 'io.dropwizard:dropwizard-spdy:' + dropwizardVersion
     compile 'io.dropwizard:dropwizard-hibernate:' + dropwizardVersion
     compile 'io.dropwizard:dropwizard-migrations:' + dropwizardVersion
 

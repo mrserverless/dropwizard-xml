@@ -22,12 +22,15 @@ To test the example application run the following commands.
 
         java -jar build/distributions/dropwizard-example-xml-0.5.0.jar server example.yml
 
-* To hit the Hello World example (hit refresh a few times).
+* To hit the Hello XML Pirates example (hit refresh a few times).
 
-	http://localhost:8080/hello-world
+	    http://localhost:8080/pirates
 
-* To post data into the application.
+* To post data into the application. Use [PostMan][http://www.getpostman.com/] REST Client would be the easiest way.
 
-	curl -H "Content-Type: application/json" -X POST -d '{"fullName":"Other Person","emailAddress":"Other Title"}' http://localhost:8080/people
-	
-	open http://localhost:8080/people
+        load the HellXMLPirates.json collection using PostMan
+
+* To reset the database:
+
+        java -jar build/distributions/dropwizard-example-xml-0.5.0.jar db drop-all helloxml.yml --confirm-delete-everything
+

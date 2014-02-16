@@ -1,0 +1,50 @@
+{
+	"id": "95612110-eb2e-15d0-4d6a-cecd21330b03",
+	"name": "Hello XML Pirates",
+	"description": "",
+	"order": [
+		"57f21015-5108-9ead-108a-b6884276292b",
+		"aaa4cec2-0653-8068-1307-3ec87c9ec988"
+	],
+	"folders": [],
+	"timestamp": 1392549211845,
+	"synced": false,
+	"requests": [
+		{
+			"id": "57f21015-5108-9ead-108a-b6884276292b",
+			"headers": "",
+			"url": "http://localhost:8080/ships",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"name": "Find All Ships",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1392549211845,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"collectionId": "95612110-eb2e-15d0-4d6a-cecd21330b03",
+			"synced": false
+		},
+		{
+			"id": "aaa4cec2-0653-8068-1307-3ec87c9ec988",
+			"headers": "",
+			"url": "http://localhost:8080/pirates",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"name": "Find All Pirates",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1392549239701,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"collectionId": "95612110-eb2e-15d0-4d6a-cecd21330b03",
+			"synced": false
+		}
+	]
+}

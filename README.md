@@ -14,7 +14,7 @@ Dropwizard is fast, container-less and JSON is awesome. But understandably, XML 
 Dropwizard-xml is compatible with Dropwizard 0.7.0-rc1 and above only. Dropwizard 0.7 uses Jackson 2.3.0. The previous Dropwizard release uses Jackson 2.1.4 which contains a show stopper bug with XML unwrapped lists. See jackson-dataformat-xml
 [ISSUE-58](https://github.com/FasterXML/jackson-dataformat-xml/issues/58)
 
-For unwrapped lists containing elements with multiple attributes, it's easier to use JAXB annotation.
+For unwrapped lists containing elements with attributes, there is an oustanding bug where lists must be placed after non-list elements
 [ISSUE-101](https://github.com/FasterXML/jackson-dataformat-xml/issues/101)
 
 Certain configurations such as Indentation are switched on by default. Will attempt to make these configurable in the
@@ -34,23 +34,22 @@ Annotate your Resources accordingly with XML mediatype:
     @Produces(MediaType.APPLICATION_XML)
     @Consumes(MediaType.APPLICATION_XML)
 
-Annotate your model POJO with either Jackson bindings:
+Annotate your model POJO with either Jackson XML bindings (See jackson-dataformat-xml project):
 
     @JacksonXmlRootElement
     @JacksonXmlProperty
     @JacksonXmlElementWrapper
     @JacksonXmlText
 
-or JAXB:
+or JAXB (need to enable annotation introspector, see Jackson manual for more details):
 
     @XmlType
     @XmlAttribute
-    etc
 
 And you can use the same validator annotations as you would with a JSON POJO when working with Dropwizard:
 
     @NotNull
     @Min
-    etc
 
-Sample project coming soon.
+###Sample project
+See dropwizard-example-xml subproject.

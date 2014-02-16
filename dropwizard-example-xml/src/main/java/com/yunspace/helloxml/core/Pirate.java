@@ -1,5 +1,6 @@
 package com.yunspace.helloxml.core;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @NamedQueries({
     @NamedQuery(
         name = "com.yunspace.helloxml.core.Pirate.findAll",
-        query = "SELECT p FROM Pirate p JOIN FETCH p.ships s WHERE p.pirateId = s.shipCaptain"
+        query = "SELECT DISTINCT p FROM Pirate p LEFT JOIN FETCH p.ships s WHERE p.pirateId = s.shipCaptain"
     ),
     @NamedQuery(
         name = "com.yunspace.helloxml.core.Pirate.findById",
@@ -35,6 +36,8 @@ public class Pirate {
     private String realName;
 
     @OneToMany(mappedBy = "shipCaptain", fetch = FetchType.EAGER)
+    @JacksonXmlProperty(localName = "Ship")
+    @JacksonXmlElementWrapper(useWrapping = true, localName = "Ships")
     private List<Ship> ships;
 
     public long getPirateId() {

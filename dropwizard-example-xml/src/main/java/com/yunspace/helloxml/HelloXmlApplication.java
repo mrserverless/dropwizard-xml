@@ -54,7 +54,6 @@ public class HelloXmlApplication extends Application<HelloXmlConfiguration> {
 
         //register xml provider
         environment.jersey().register(new JacksonXMLMessageBodyProvider(configureMapper(), environment.getValidator()));
-
         final PirateDAO pirateDAO = new PirateDAO(hibernateBundle.getSessionFactory());
         final ShipDAO shipDAO = new ShipDAO(hibernateBundle.getSessionFactory());
         environment.jersey().register(new PirateResource(pirateDAO));

@@ -32,7 +32,7 @@ public class Ship {
 
     @ManyToOne()
     @JoinColumn(name = "pirate_id")
-    private Pirate shipCaptain; //use getter to avoid serialization inifite loop
+    private Pirate shipCaptain;
 
     public Ship() {
         // Jackson deserialization
@@ -40,11 +40,10 @@ public class Ship {
 
     @JacksonXmlProperty(localName = "ShipCaptain")
     public String getCaptain() {
-        // avoid a infinite loop by returning Captain name isn't of Captain object.
+        // avoid a infinite loop by returning Captain name instead of Captain object.
         return shipCaptain.getNickName();
     }
 
-    @JacksonXmlProperty(localName = "ShipCaptain")
     public void setCaptain(Pirate pirate) {
         this.shipCaptain = pirate;
     }

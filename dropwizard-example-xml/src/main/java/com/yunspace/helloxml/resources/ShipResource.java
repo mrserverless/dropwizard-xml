@@ -23,6 +23,7 @@ public class ShipResource {
     @POST
     @UnitOfWork
     @Consumes(MediaType.APPLICATION_XML)
+    @Produces(MediaType.APPLICATION_XML)
     public Ship createShip(Ship ship) {
         return shipDAO.create(ship);
     }

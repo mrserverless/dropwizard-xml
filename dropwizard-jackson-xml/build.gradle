@@ -1,6 +1,6 @@
 
 project.ext {
-    jacksonVersion = '2.3.0'
+    jacksonVersion = '2.3.1'
     xmlProviderVersion = '2.1.5'
     woodstoxVersion = '4.2.0'
     woodstoxStaxVersion = '3.1.1'

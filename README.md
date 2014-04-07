@@ -11,18 +11,29 @@ Uses:
 Dropwizard is fast, war-less and JSON with Jackson is awesome. But understandably, XML files are deeply rooted into the IT ecosystem of many organisations. It would be great to leverage the power and simplicity of Dropwizard to build XML RESTful web services, instead of relying on bloated frameworks and chunky application servers. That's what this project aims to do.
 
 ## Dependencies
-This project is pegged against Dropwizard's minior release number and the same Jackson dependency as Dropwizard to avoid conflicts.
+This project is pegged against Dropwizard's release number and try to use the same Jackson dependency to avoid conflicts.
 
 | Dropwizard-XML  | Dropwizard   | Jackson   |
 | --------------- | ------------ | --------- |
-| v0.5.0          | v0.7.0-rc1   | 2.3.0     |
-| v0.7.0          | v0.7.0-rc2   | 2.3.0     |
-| v0.7.1          | v0.7.0-rc2   | 2.3.1     |
+| 0.7.0-1         | 0.7.0        | 2.3.2     |
 
 ## Usage
 Unfortunately there is no maven repository yet. For now, simply download the project, run gradlew or gradlew.bat to compile and install to your local maven repository:
 
     gradlew install
+
+Add the dependency to your project using either Maven:
+
+    <dependency>
+        <groupId>com.yunspace</groupId>
+        <artifactId>dropwizard-jackson-xml</artifactId>
+        <version>0.7.0-1-SNAPSHOT</version>
+        <scope>compile</scope>
+    </dependency>
+
+Or Gradle:
+
+    compile 'com.yunspace.dropwizard:dropwizard-jackson-xml:0.7.0-1-SNAPSHOT
 
 To use the XML Provider, simply register it in your Application.Run() method:
 
@@ -58,6 +69,5 @@ See dropwizard-example-xml subproject.
 Dropwizard-xml is compatible with Dropwizard 0.7.X and above only. Dropwizard 0.7 uses Jackson 2.3.0. The previous Dropwizard 0.6.2 stable release uses Jackson 2.1.4 which contains a show stopper bug with XML unwrapped lists. See jackson-dataformat-xml
 [ISSUE-58](https://github.com/FasterXML/jackson-dataformat-xml/issues/58)
 
-Also for unwrapped lists containing elements with attributes, there is an oustanding bug where lists must be placed after non-list elements
-[ISSUE-101](https://github.com/FasterXML/jackson-dataformat-xml/issues/101) You can try and work around by placing your lists after elements and attributes in your POJO.
-
+For unwrapped lists containing elements with attributes, there is an defect which was resolved in jackson dataformat 2.3.3.
+[ISSUE-101](https://github.com/FasterXML/jackson-dataformat-xml/issues/101) I will incorporate this into version 0.7.0-2

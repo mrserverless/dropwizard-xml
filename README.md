@@ -15,7 +15,7 @@ This project is pegged against Dropwizard's release number and try to use the sa
 
 | Dropwizard-XML  | Dropwizard   | Jackson   |
 | --------------- | ------------ | --------- |
-| 0.7.0-1         | 0.7.0        | 2.3.2     |
+| 0.7.0.1         | 0.7.0        | 2.3.2     |
 
 ## Usage
 Unfortunately there is no maven repository yet. For now, simply download the project, run gradlew or gradlew.bat to compile and install to your local maven repository:
@@ -69,5 +69,5 @@ See dropwizard-example-xml subproject.
 Dropwizard-xml is compatible with Dropwizard 0.7.X and above only. Dropwizard 0.7 uses Jackson 2.3.0. The previous Dropwizard 0.6.2 stable release uses Jackson 2.1.4 which contains a show stopper bug with XML unwrapped lists. See jackson-dataformat-xml
 [ISSUE-58](https://github.com/FasterXML/jackson-dataformat-xml/issues/58)
 
-For unwrapped lists containing elements with attributes, there is an defect which was resolved in jackson dataformat 2.3.3.
-[ISSUE-101](https://github.com/FasterXML/jackson-dataformat-xml/issues/101) I will incorporate this into version 0.7.0-2
+For unwrapped lists containing elements with attributes, there is an defect which was resolved in jackson dataformat 2.3.3 which is currently used by dropwizard 0.7.1-SNAPSHOT
+[ISSUE-101](https://github.com/FasterXML/jackson-dataformat-xml/issues/101) I will incorporate this into dropwizard-xml version: 0.7.1.1

@@ -13,10 +13,10 @@ Dropwizard is fast, war-less and JSON with Jackson is awesome. But understandabl
 ## Dependencies
 This project is pegged against Dropwizard's release number and try to use the same Jackson dependency to avoid conflicts.
 
-| Dropwizard-XML  | Dropwizard   | Jackson   |
-| --------------- | ------------ | --------- |
-| 0.7.0.1         | 0.7.0        | 2.3.2     |
-| 0.7.1.1         | 0.7.1        | 2.3.3     |
+| Dropwizard-XML   | Dropwizard     | Jackson   |
+| ---------------- | -------------- | --------- |
+| 0.7.0.1          | 0.7.0          | 2.3.2     |
+| 0.7.1.1-SNAPSHOT | 0.7.1-SNAPSHOT | 2.3.3     |
 
 
 ## Usage
@@ -29,7 +29,7 @@ Add the dependency to your project using either Maven:
     <dependency>
         <groupId>com.yunspace</groupId>
         <artifactId>dropwizard-jackson-xml</artifactId>
-        <version>0.7.0-1-SNAPSHOT</version>
+        <version>0.7.1.1-SNAPSHOT</version>
         <scope>compile</scope>
     </dependency>
 

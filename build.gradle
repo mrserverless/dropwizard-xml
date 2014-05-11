@@ -4,7 +4,7 @@ allprojects {
     apply plugin: 'maven'
 
     group = 'com.yunspace.dropwizard'
-    version = '0.7.0.1'
+    version = '0.7.1.1-SNAPSHOT'
 
     task wrapper(type: Wrapper) {
         gradleVersion = '1.10'
@@ -23,7 +23,7 @@ subprojects {
     }
 
     project.ext {
-        dropwizardVersion = '0.7.0'
+        dropwizardVersion = '0.7.1-SNAPSHOT'
     }
 
     dependencies {

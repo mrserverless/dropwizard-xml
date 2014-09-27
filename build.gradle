@@ -23,7 +23,7 @@ subprojects {
     }
 
     project.ext {
-        dropwizardVersion = '0.7.1-SNAPSHOT'
+        dropwizardVersion = '0.7.1'
     }
 
     dependencies {

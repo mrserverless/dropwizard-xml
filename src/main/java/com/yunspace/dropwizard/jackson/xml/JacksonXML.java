@@ -10,16 +10,9 @@ import io.dropwizard.jackson.DiscoverableSubtypeResolver;
 import io.dropwizard.jackson.FuzzyEnumModule;
 import io.dropwizard.jackson.LogbackModule;
 
-/**
- * Created by Yun Zhi Lin on 8/01/14.
- */
 public class JacksonXML {
     private JacksonXML() { /* singleton */ }
 
-    /**
-     * default to a new JacksonXmlModule when none is given
-     * @return XmlMapper
-     */
     public static XmlMapper newXMLMapper() {
 
         return newXMLMapper(new JacksonXmlModule());

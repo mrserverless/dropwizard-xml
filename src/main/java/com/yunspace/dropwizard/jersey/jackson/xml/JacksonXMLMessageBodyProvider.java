@@ -21,17 +21,9 @@ import java.util.Set;
 
 
 /**
- *
- * A Jersey provider which enables using Jackson XML to parse request entities into objects and generate
- * response entities from objects. Any request entity method parameters annotated with
- * {@code @Valid} are validated, and an informative 422 Unprocessable Entity response is returned
- * should the entity be invalid.
- * <p/>
  * (Essentially the same as {@link io.dropwizard.jersey.jackson.JacksonMessageBodyProvider} except it extends
  * {@link com.fasterxml.jackson.jaxrs.xml.JacksonJaxbXMLProvider} and uses the
  * {@link com.fasterxml.jackson.dataformat.xml.XmlMapper}
- *
- * Created by Yun Zhi Lin on 7/01/14.
  */
 public class JacksonXMLMessageBodyProvider extends JacksonJaxbXMLProvider {
 

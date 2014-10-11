@@ -16,7 +16,7 @@ This project is pegged against Dropwizard's release number and try to use the sa
 | Dropwizard-XML   | Dropwizard     | Jackson   |
 | ---------------- | -------------- | --------- |
 | 0.7.0.1          | 0.7.0          | 2.3.2     |
-| 0.7.1.1-SNAPSHOT | 0.7.1-SNAPSHOT | 2.3.3     |
+| 0.7.1.1          | 0.7.1          | 2.3.3     |
 
 
 ## Usage

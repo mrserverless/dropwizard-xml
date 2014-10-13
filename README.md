@@ -49,4 +49,4 @@ Use validation/ignore annotations as you would normally in Dropwizard:
     @NotNull @Min @JsonIgnore
 
 ##Sample project
-See dropwizard-example-xml subproject.
+See [Dropwizrd XML Example](https://github.com/yunspace/dropwizard-xml-example) project.

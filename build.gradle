@@ -4,7 +4,7 @@ apply plugin: 'java'
 
 jar.archiveName = 'dropwizard-jackson-xml.jar'
 group = 'com.yunspace.dropwizard'
-version = '0.7.1.1'
+version = '0.8.0.1-SNAPSHOT'
 
 
 task wrapper(type: Wrapper) {
@@ -17,15 +17,16 @@ repositories {
 }
 
 project.ext {
-    dropwizardVersion = '0.7.1'
-    jacksonVersion = '2.3.3'
-    xmlProviderVersion = '2.1.5'
-    woodstoxVersion = '4.3.0'
+    dropwizardVersion = '0.8.0-SNAPSHOT'
+    jacksonVersion = '2.4.1'
+    xmlProviderVersion = '2.4.3'
+    woodstoxVersion = '4.4.1'
     woodstoxStaxVersion = '3.1.4'
 }
 
 dependencies {
     //dropwizard
+    compile 'io.dropwizard:dropwizard-core:' + dropwizardVersion
     compile 'io.dropwizard:dropwizard-jersey:' + dropwizardVersion
     compile 'io.dropwizard:dropwizard-validation:' + dropwizardVersion
 

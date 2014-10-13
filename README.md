@@ -12,7 +12,7 @@ This project is pegged against Dropwizard's release number and try to use the sa
 | ---------------- | -------------- | --------- |
 | 0.7.0.1          | 0.7.0          | 2.3.2     |
 | 0.7.1.1          | 0.7.1          | 2.3.3     |
-| 0.8.0.1-SNAPSHOT | 0.8.8-SNAPSHOT | 2.4.1     |
+| 0.8.0.1-SNAPSHOT | 0.8.0-SNAPSHOT | 2.4.1     |
 
 ## Usage
 Download the project, run gradlew or gradlew.bat to compile and install to your local maven repository:

@@ -1,24 +1,11 @@
 package com.yunspace.dropwizard.jersey.jackson.xml;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
-import com.sun.jersey.core.util.StringKeyObjectValueIgnoreCaseMultivaluedMap;
-import com.yunspace.dropwizard.jackson.xml.JacksonXML;
-import io.dropwizard.validation.ConstraintViolations;
-import io.dropwizard.validation.Validated;
-import org.fest.assertions.api.Assertions;
-import org.hamcrest.CoreMatchers;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mockito;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.lang.annotation.Annotation;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
@@ -27,12 +14,27 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.lang.annotation.Annotation;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import javax.ws.rs.core.MultivaluedHashMap;
+
+import org.fest.assertions.api.Assertions;
+import org.hamcrest.CoreMatchers;
+import org.junit.Assume;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mockito;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
+import com.yunspace.dropwizard.jackson.xml.JacksonXML;
+
+import io.dropwizard.validation.ConstraintViolations;
+import io.dropwizard.validation.Validated;
 
 @SuppressWarnings("unchecked")
 public class JacksonXMLMessageBodyProviderTest {
@@ -70,14 +72,15 @@ public class JacksonXMLMessageBodyProviderTest {
         List<String>unwrappedList;
 
         static final String sampleXml =
-                "<ListExample><wrappedList>" + System.lineSeparator() +
-                "    <wrappedList>1</wrappedList>" + System.lineSeparator() +
-                "    <wrappedList>2</wrappedList>" + System.lineSeparator() +
-                "    <wrappedList>3</wrappedList>" + System.lineSeparator() +
-                "  </wrappedList>" + System.lineSeparator() +
-                "  <unwrappedList>4</unwrappedList>" + System.lineSeparator() +
-                "  <unwrappedList>5</unwrappedList>" + System.lineSeparator() +
-                "  <unwrappedList>6</unwrappedList>" + System.lineSeparator() +
+                "<ListExample>\n" +
+                "  <unwrappedList>4</unwrappedList>\n" +
+                "  <unwrappedList>5</unwrappedList>\n" +
+                "  <unwrappedList>6</unwrappedList>\n" +
+                "  <wrappedList>\n" +
+                "    <wrappedList>1</wrappedList>\n" +
+                "    <wrappedList>2</wrappedList>\n" +
+                "    <wrappedList>3</wrappedList>\n" +
+                "  </wrappedList>\n" +
                 "</ListExample>";
     }
 
@@ -169,7 +172,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 Example.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedMapImpl(),
+                new MultivaluedHashMap<String, String>(),
                 entity);
 
         Assertions.assertThat(obj)
@@ -191,7 +194,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 ListExample.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedMapImpl(),
+                new MultivaluedHashMap<String, String>(),
                 requestList);
 
         Assertions.assertThat(obj)
@@ -215,7 +218,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 AttributeExample.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedMapImpl(),
+                new MultivaluedHashMap<String, String>(),
                 entity);
 
         Assertions.assertThat(obj)
@@ -240,7 +243,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 PartialExample.class,
                 new Annotation[]{valid},
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedMapImpl(),
+                new MultivaluedHashMap<String, String>(),
                 entity);
 
         Assertions.assertThat(obj)
@@ -263,7 +266,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 PartialExample.class,
                 new Annotation[]{valid},
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedMapImpl(),
+                new MultivaluedHashMap<String, String>(),
                 entity);
 
         Assertions.assertThat(obj)
@@ -287,7 +290,7 @@ public class JacksonXMLMessageBodyProviderTest {
                     PartialExample.class,
                     new Annotation[]{ valid },
                     MediaType.APPLICATION_XML_TYPE,
-                    new MultivaluedMapImpl(),
+                    new MultivaluedHashMap<String, String>(),
                     entity);
             Assertions.failBecauseExceptionWasNotThrown(ConstraintViolationException.class);
         } catch(ConstraintViolationException e) {
@@ -308,7 +311,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 Example.class,
                 new Annotation[]{ valid },
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedMapImpl(),
+                new MultivaluedHashMap<String, String>(),
                 entity);
 
         Assertions.assertThat(obj)
@@ -331,7 +334,7 @@ public class JacksonXMLMessageBodyProviderTest {
                     Example.class,
                     new Annotation[]{ valid },
                     MediaType.APPLICATION_XML_TYPE,
-                    new MultivaluedMapImpl(),
+                    new MultivaluedHashMap<String, String>(),
                     entity);
             Assertions.failBecauseExceptionWasNotThrown(ConstraintViolationException.class);
         } catch (ConstraintViolationException e) {
@@ -350,7 +353,7 @@ public class JacksonXMLMessageBodyProviderTest {
                     Example.class,
                     NONE,
                     MediaType.APPLICATION_XML_TYPE,
-                    new MultivaluedMapImpl(),
+                    new MultivaluedHashMap<String, String>(),
                     entity);
             Assertions.failBecauseExceptionWasNotThrown(WebApplicationException.class);
         } catch (JsonProcessingException e) {
@@ -373,7 +376,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 Example.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new StringKeyObjectValueIgnoreCaseMultivaluedMap(),
+                new MultivaluedHashMap<String, Object>(),
                 output);
 
         Assertions.assertThat(output.toString())
@@ -396,7 +399,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 ListExample.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new StringKeyObjectValueIgnoreCaseMultivaluedMap(),
+                new MultivaluedHashMap<String, Object>(),
                 output);
 
         Assertions.assertThat(output.toString())
@@ -416,7 +419,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 AttributeExample.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new StringKeyObjectValueIgnoreCaseMultivaluedMap(),
+                new MultivaluedHashMap<String, Object>(),
                 output);
 
         Assertions.assertThat(output.toString())
@@ -435,7 +438,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 NamespaceLocalNameExample.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new StringKeyObjectValueIgnoreCaseMultivaluedMap(),
+                new MultivaluedHashMap<String, Object>(),
                 output);
 
         Assertions.assertThat(output.toString())

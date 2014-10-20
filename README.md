@@ -50,3 +50,8 @@ Use validation/ignore annotations as you would normally in Dropwizard:
 
 ##Sample project
 See [Dropwizrd XML Example](https://github.com/yunspace/dropwizard-xml-example) project.
+
+##TODO
+ * Make this into a Dropwizard Bundle
+ * Deploy to Maven repo
+

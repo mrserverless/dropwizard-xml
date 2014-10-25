@@ -1,0 +1,36 @@
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'application'
+
+mainClassName = 'com.yunspace.dropwizard.xml.example.PirateApplication'
+
+dependencies {
+    // dropwizard
+    compile 'io.dropwizard:dropwizard-core:' + dropwizardVersion
+    compile 'io.dropwizard:dropwizard-hibernate:' + dropwizardVersion
+    compile 'io.dropwizard:dropwizard-migrations:' + dropwizardVersion
+    compile 'com.yunspace.dropwizard:dropwizard-xml:' + version
+    compile 'com.h2database:h2:' + h2Version
+
+    // test
+    testCompile 'junit:junit:4.11'
+    compile 'io.dropwizard:dropwizard-testing:' + dropwizardVersion
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.1'
+}
+
+shadowJar {
+    baseName "dropwizard-xml-example"
+    archiveName "dropwizard-xml-example.jar"
+    destinationDir project.buildDir
+
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+    mergeServiceFiles()
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.RSA'
+}
+
+

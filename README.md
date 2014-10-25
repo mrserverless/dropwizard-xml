@@ -8,33 +8,41 @@ Uses:
 ## Dependencies
 This project is pegged against Dropwizard's release number and try to use the same Jackson dependency to avoid conflicts.
 
-| Dropwizard-XML   | Dropwizard     | Jackson   |
-| ---------------- | -------------- | --------- |
-| 0.7.0.1          | 0.7.0          | 2.3.2     |
-| 0.7.1.1          | 0.7.1          | 2.3.3     |
-| 0.8.0.1-SNAPSHOT | 0.8.0-SNAPSHOT | 2.4.1     |
+| Dropwizard-XML   | Dropwizard     | Jackson   | Woodstox | Stax  |
+| ---------------- | -------------- | --------- | -------- |------ |
+| 0.7.1-2          | 0.7.1          | 2.3.3     | 4.4.1    | 3.1.4 |
+| 0.8.0.1-SNAPSHOT | 0.8.0-SNAPSHOT | 2.4.1     | 4.4.1    | 3.1.4 |
 
 ## Usage
-Download the project, run gradlew or gradlew.bat to compile and install to your local maven repository:
+Dropwizard XML Provider is hosted by [JCenter](https://bintray.com/bintray/jcenter).
 
-    gradlew install
+You can add the dependency to your project by Maven:
 
-Add the dependency to your project by Maven:
-
+    <repository>
+        <id>jcenter</id>
+        <name>JCenter</name>
+        <url>http://jcenter.bintray.com</url>
+    </repository>
     <dependency>
-        <groupId>com.yunspace</groupId>
-        <artifactId>dropwizard-jackson-xml</artifactId>
-        <version>0.7.1.1</version>
+        <groupId>com.yunspace.dropwizard</groupId>
+        <artifactId>dropwizard-xml</artifactId>
+        <version>0.7.1-2</version>
         <scope>compile</scope>
     </dependency>
 
 Or Gradle:
 
-    compile 'com.yunspace.dropwizard:dropwizard-jackson-xml:0.7.1.1
+    repositories {
+            jcenter()
+            mavenCentral()
+    }
+    dependencies {
+        compile 'com.yunspace.dropwizard:dropwizard-xml:0.7.1-2
+    }
+    
+Add the XMLBundle
 
-Register the XML Provider in your Application.Run() method:
-
-    env.jersey().register(new JacksonXMLMessageBodyProvider(JacksonXML.newXMLMapper(), env.getValidator()));
+    bootstrap.addBundle(new XMLBundle());
 
 Annotate your Resources with application/xml mediatype:
 
@@ -49,4 +57,4 @@ Use validation/ignore annotations as you would normally in Dropwizard:
     @NotNull @Min @JsonIgnore
 
 ##Sample project
-See dropwizard-example-xml subproject.
+See dropwizard-xml-example subproject.

@@ -1,45 +1,37 @@
-apply plugin: 'idea'
-apply plugin: 'maven'
-apply plugin: 'java'
-
-jar.archiveName = 'dropwizard-jackson-xml.jar'
-group = 'com.yunspace.dropwizard'
-version = '0.8.0.1-SNAPSHOT'
-
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:' + shadowVersion
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:' + gradleBintrayVersion
+    }
+}
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.1'
 }
 
-repositories {
-    mavenLocal()
-    mavenCentral()
+subprojects {
+    apply plugin: 'maven'
+    apply plugin: 'java'
+
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+
+    group = 'com.yunspace.dropwizard'
+    version = '0.7.1-2'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        testCompile 'org.mockito:mockito-all:1.9.5'
+        testCompile 'org.easytesting:fest-assert-core:2.0M10'
+        testCompile 'junit:junit:4.11'
+    }
+
+
 }
-
-project.ext {
-    dropwizardVersion = '0.8.0-SNAPSHOT'
-    jacksonVersion = '2.4.1'
-    xmlProviderVersion = '2.4.3'
-    woodstoxVersion = '4.4.1'
-    woodstoxStaxVersion = '3.1.4'
-}
-
-dependencies {
-    //dropwizard
-    compile 'io.dropwizard:dropwizard-core:' + dropwizardVersion
-    compile 'io.dropwizard:dropwizard-jersey:' + dropwizardVersion
-    compile 'io.dropwizard:dropwizard-validation:' + dropwizardVersion
-
-    //jackson
-    compile 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider:' + xmlProviderVersion
-    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:' + jacksonVersion
-
-    //woodstox
-    compile 'org.codehaus.woodstox:woodstox-core-asl:' + woodstoxVersion
-    compile 'org.codehaus.woodstox:stax2-api:' + woodstoxStaxVersion
-
-    testCompile 'org.mockito:mockito-all:1.9.5'
-    testCompile 'org.easytesting:fest-assert-core:2.0M10'
-    testCompile 'junit:junit:4.11'
-}
-

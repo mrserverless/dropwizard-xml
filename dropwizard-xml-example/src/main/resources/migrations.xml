@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="create pirates table" author="yunspace">
+        <createTable tableName="pirates">
+            <column name="pirate_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nick_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="real_name" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="create ships table with FK" author="yunspace">
+        <createTable tableName="ships">
+            <column name="ship_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ship_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pirate_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="pirate_id"
+                                 baseTableName="ships"
+                                 constraintName="fk_ships_pirate"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="pirate_id"
+                                 referencedTableName="pirates"/>
+    </changeSet>
+</databaseChangeLog>

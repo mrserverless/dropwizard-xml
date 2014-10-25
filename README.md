@@ -1,9 +1,14 @@
 # Dropwizard XML Provider
-[Dropwizard](https://github.com/dropwizard/dropwizard) extension for high performance processing and validation of XML
+[Dropwizard](https://github.com/dropwizard/dropwizard) extension for high performance processing and validation of XML.
 
 Uses:
 * [Jackson XML Provider](https://github.com/FasterXML/jackson-jaxrs-xml-provider) Jackson XML Provider with woodstox under the hood.
-* [Hibernate Validator](http://hibernate.org/validator/) same as JSON validation for Dropwizard 
+* [Hibernate Validator](http://hibernate.org/validator/) same Dropwizard validation behvaiour for XML 
+
+## Status
+
+<a href='https://bintray.com/yunspace/dropwizard/dropwizard-xml/view?source=watch' alt='Get automatic notifications about new "dropwizard-xml" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_color.png'></a>
+[![Download](https://api.bintray.com/packages/yunspace/dropwizard/dropwizard-xml/images/download.svg)](https://bintray.com/yunspace/dropwizard/dropwizard-xml/_latestVersion)
 
 ## Dependencies
 This project is pegged against Dropwizard's release number and try to use the same Jackson dependency to avoid conflicts.

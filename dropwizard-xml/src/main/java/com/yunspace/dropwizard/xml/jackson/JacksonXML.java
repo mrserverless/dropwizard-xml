@@ -6,6 +6,7 @@ import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
 import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
+import com.fasterxml.jackson.datatype.jdk7.Jdk7Module;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 
 import io.dropwizard.jackson.AnnotationSensitivePropertyNamingStrategy;
@@ -39,6 +40,7 @@ public class JacksonXML {
         mapper.registerModule(new GuavaExtrasModule());
         mapper.registerModule(new JodaModule());
         mapper.registerModule(new FuzzyEnumModule());
+        mapper.registerModule(new Jdk7Module());
         mapper.setPropertyNamingStrategy(new AnnotationSensitivePropertyNamingStrategy());
         mapper.setSubtypeResolver(new DiscoverableSubtypeResolver());
 

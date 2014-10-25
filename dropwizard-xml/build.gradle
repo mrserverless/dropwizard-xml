@@ -8,6 +8,7 @@ dependencies {
     //jackson
     compile 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider:' + xmlProviderVersion
     compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:' + jacksonVersion
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jdk7:' + jacksonVersion
 
     //woodstox
     compile 'org.codehaus.woodstox:woodstox-core-asl:' + woodstoxVersion

@@ -14,6 +14,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedHashMap;
 
 import org.fest.assertions.api.Assertions;
 import org.hamcrest.CoreMatchers;
@@ -29,8 +30,6 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
-import com.sun.jersey.core.util.StringKeyObjectValueIgnoreCaseMultivaluedMap;
 import com.yunspace.dropwizard.xml.jackson.JacksonXML;
 import com.yunspace.dropwizard.xml.jersey.jackson.JacksonXMLMessageBodyProvider;
 
@@ -49,8 +48,8 @@ public class JacksonXMLMessageBodyProviderTest {
         int id;
     }
 
-    public interface Partial1{}
-    public interface Partial2{}
+    public interface Partial1 {}
+    public interface Partial2 {}
 
     public static class PartialExample {
         @Min(value = 0, groups = Partial1.class)
@@ -175,7 +174,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 Example.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedMapImpl(),
+                new MultivaluedHashMap<String, String>(),
                 entity);
 
         Assertions.assertThat(obj)
@@ -197,7 +196,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 ListExample.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedMapImpl(),
+                new MultivaluedHashMap<String, String>(),
                 requestList);
 
         Assertions.assertThat(obj)
@@ -221,7 +220,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 AttributeExample.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedMapImpl(),
+                new MultivaluedHashMap<String, String>(),
                 entity);
 
         Assertions.assertThat(obj)
@@ -246,7 +245,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 PartialExample.class,
                 new Annotation[]{valid},
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedMapImpl(),
+                new MultivaluedHashMap<String, String>(),
                 entity);
 
         Assertions.assertThat(obj)
@@ -269,7 +268,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 PartialExample.class,
                 new Annotation[]{valid},
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedMapImpl(),
+                new MultivaluedHashMap<String, String>(),
                 entity);
 
         Assertions.assertThat(obj)
@@ -293,7 +292,7 @@ public class JacksonXMLMessageBodyProviderTest {
                     PartialExample.class,
                     new Annotation[]{ valid },
                     MediaType.APPLICATION_XML_TYPE,
-                    new MultivaluedMapImpl(),
+                    new MultivaluedHashMap<String, String>(),
                     entity);
             Assertions.failBecauseExceptionWasNotThrown(ConstraintViolationException.class);
         } catch(ConstraintViolationException e) {
@@ -314,7 +313,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 Example.class,
                 new Annotation[]{ valid },
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedMapImpl(),
+                new MultivaluedHashMap<String, String>(),
                 entity);
 
         Assertions.assertThat(obj)
@@ -337,7 +336,7 @@ public class JacksonXMLMessageBodyProviderTest {
                     Example.class,
                     new Annotation[]{ valid },
                     MediaType.APPLICATION_XML_TYPE,
-                    new MultivaluedMapImpl(),
+                    new MultivaluedHashMap<String, String>(),
                     entity);
             Assertions.failBecauseExceptionWasNotThrown(ConstraintViolationException.class);
         } catch (ConstraintViolationException e) {
@@ -356,7 +355,7 @@ public class JacksonXMLMessageBodyProviderTest {
                     Example.class,
                     NONE,
                     MediaType.APPLICATION_XML_TYPE,
-                    new MultivaluedMapImpl(),
+                    new MultivaluedHashMap<String, String>(),
                     entity);
             Assertions.failBecauseExceptionWasNotThrown(WebApplicationException.class);
         } catch (JsonProcessingException e) {
@@ -379,7 +378,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 Example.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new StringKeyObjectValueIgnoreCaseMultivaluedMap(),
+                new MultivaluedHashMap<String, Object>(),
                 output);
 
         Assertions.assertThat(output.toString())
@@ -402,7 +401,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 ListExample.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new StringKeyObjectValueIgnoreCaseMultivaluedMap(),
+                new MultivaluedHashMap<String, Object>(),
                 output);
 
         Assertions.assertThat(output.toString())
@@ -422,7 +421,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 AttributeExample.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new StringKeyObjectValueIgnoreCaseMultivaluedMap(),
+                new MultivaluedHashMap<String, Object>(),
                 output);
 
         Assertions.assertThat(output.toString())
@@ -441,7 +440,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 NamespaceLocalNameExample.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new StringKeyObjectValueIgnoreCaseMultivaluedMap(),
+                new MultivaluedHashMap<String, Object>(),
                 output);
 
         Assertions.assertThat(output.toString())

@@ -11,7 +11,7 @@ This project is pegged against Dropwizard's release number and try to use the sa
 | Dropwizard-XML   | Dropwizard     | Jackson   | Woodstox | Stax  |
 | ---------------- | -------------- | --------- | -------- |------ |
 | 0.7.1-2          | 0.7.1          | 2.3.3     | 4.4.1    | 3.1.4 |
-| 0.8.0.1-SNAPSHOT | 0.8.0-SNAPSHOT | 2.4.1     | 4.4.1    | 3.1.4 |
+| 0.8.0-1-SNAPSHOT | 0.8.0-SNAPSHOT | 2.4.1     | 4.4.1    | 3.1.4 |
 
 ## Usage
 Dropwizard XML Provider is hosted by [JCenter](https://bintray.com/bintray/jcenter).

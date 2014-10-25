@@ -1,4 +1,5 @@
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
 
 dependencies {
     //dropwizard
@@ -13,17 +14,43 @@ dependencies {
     compile 'org.codehaus.woodstox:stax2-api:' + woodstoxStaxVersion
 }
 
-bintray {
-    user = 'bintray_user'
-    key = 'bintray_api_key'
+// custom tasks for creating source jars
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
 
-    publications = ['mavenStuff'] //When uploading Maven-based publication files
+// add javadoc/source jar tasks as artifacts
+artifacts {
+    archives sourcesJar
+}
+
+repositories {
+    jcenter()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            artifact sourcesJar {
+                classifier "sources"
+            }
+        }
+    }
+}
+
+bintray {
+    user = 'yunspace'
+    key = ''
+
+    publications = ['mavenJava']
 
     dryRun = false //Whether to run this as dry-run, without deploying
     publish = true //If version should be auto published after an upload
     pkg {
-        repo = 'com.yunspace.dropwizard'
-//        userOrg = 'myorg' //An optional organization name when the repo belongs to one of the user's orgs
+        repo = 'dropwizard'
         name = 'dropwizard-xml'
         desc = 'Dropwizard bundle for processing and validation XML'
         websiteUrl = 'https://github.com/yunspace/dropwizard-xml'

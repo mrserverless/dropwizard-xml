@@ -44,6 +44,8 @@ Add the XMLBundle
 
     bootstrap.addBundle(new XMLBundle());
 
+    env.jersey().register(new JacksonXMLMessageBodyProvider(JacksonXML.newXMLMapper(), env.getValidator()));
+
 Annotate your Resources with application/xml mediatype:
 
     @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
@@ -57,4 +59,9 @@ Use validation/ignore annotations as you would normally in Dropwizard:
     @NotNull @Min @JsonIgnore
 
 ##Sample project
-See dropwizard-xml-example subproject.
+See [Dropwizrd XML Example](https://github.com/yunspace/dropwizard-xml-example) project.
+
+##TODO
+ * Make this into a Dropwizard Bundle
+ * Deploy to Maven repo
+

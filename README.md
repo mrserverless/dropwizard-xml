@@ -18,11 +18,12 @@ Dropwizard XML Provider is hosted by [JCenter](https://bintray.com/bintray/jcent
 
 You can add the dependency to your project by Maven:
 
-    <repository>
-        <id>jcenter</id>
-        <name>JCenter</name>
-        <url>http://jcenter.bintray.com</url>
-    </repository>
+    <repositories>
+        <repository>
+            <id>jcenter</id>
+            <url>http://jcenter.bintray.com</url>
+        </repository>
+    <repositories>
     <dependency>
         <groupId>com.yunspace.dropwizard</groupId>
         <artifactId>dropwizard-xml</artifactId>
@@ -33,8 +34,8 @@ You can add the dependency to your project by Maven:
 Or Gradle:
 
     repositories {
-            jcenter()
-            mavenCentral()
+        jcenter()
+        mavenCentral()
     }
     dependencies {
         compile 'com.yunspace.dropwizard:dropwizard-xml:0.7.1-2

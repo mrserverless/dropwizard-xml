@@ -44,24 +44,29 @@ Add the XMLBundle
 
     bootstrap.addBundle(new XMLBundle());
 
-    env.jersey().register(new JacksonXMLMessageBodyProvider(JacksonXML.newXMLMapper(), env.getValidator()));
-
-Annotate your Resources with application/xml mediatype:
+Annotate your Resources:
 
     @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
 
-Annotate your model POJO with Jackson XML bindings (See jackson-dataformat-xml project):
+Annotate your model POJO with jackson-dataformat-xml bindings:
 
     @JacksonXmlRootElement @JacksonXmlProperty @JacksonXmlElementWrapper @JacksonXmlText
 
-Use validation/ignore annotations as you would normally in Dropwizard:
+Use validation/ignore annotations as you would normally:
 
     @NotNull @Min @JsonIgnore
 
+## Advanced Usage
+
+You can further custom the behaviour of your XML Mapper by passing in a JacksonXmlModule:
+
+    bootstrap.addBundle(new XMLBundle(jacksonXmlModule));
+
+Or enable various serialisation/deserialisation features
+
+    XmlBundle indentXmlBundle = new XmlBundle();
+    indentXmlBundle.getXmlMapper().enable(SerializationFeature.INDENT_OUTPUT);
+    bootstrap.addBundle(indentXmlBundle);
+
 ##Sample project
-See [Dropwizrd XML Example](https://github.com/yunspace/dropwizard-xml-example) project.
-
-##TODO
- * Make this into a Dropwizard Bundle
- * Deploy to Maven repo
-
+See dropwizard-xml-example subproject.

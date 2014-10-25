@@ -7,7 +7,6 @@ dependencies {
     // dropwizard
     compile 'io.dropwizard:dropwizard-core:' + dropwizardVersion
     compile 'io.dropwizard:dropwizard-hibernate:' + dropwizardVersion
-    compile 'io.dropwizard:dropwizard-migrations:' + dropwizardVersion
     compile 'com.yunspace.dropwizard:dropwizard-xml:' + version
     compile 'com.h2database:h2:' + h2Version
 

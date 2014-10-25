@@ -1,5 +1,6 @@
 package com.yunspace.dropwizard.xml.example;
 
+import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
 import com.yunspace.dropwizard.xml.XmlBundle;
 import com.yunspace.dropwizard.xml.example.core.Pirate;
 import com.yunspace.dropwizard.xml.example.core.Ship;
@@ -11,9 +12,11 @@ import com.yunspace.dropwizard.xml.example.resources.ShipResource;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
-import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
+import static com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT;
 
 public class PirateApplication extends Application<PirateConfiguration> {
     public static void main(String[] args) throws Exception {
@@ -35,15 +38,14 @@ public class PirateApplication extends Application<PirateConfiguration> {
 
     @Override
     public void initialize(Bootstrap<PirateConfiguration> bootstrap) {
-
-        bootstrap.addBundle(new MigrationsBundle<PirateConfiguration>() {
-            @Override
-            public DataSourceFactory getDataSourceFactory(PirateConfiguration configuration) {
-                return configuration.getDataSourceFactory();
-            }
-        });
         bootstrap.addBundle(hibernateBundle);
-        bootstrap.addBundle(new XmlBundle());
+
+        final XmlBundle xmlBundle = new XmlBundle();
+        xmlBundle.getXmlMapper()
+                .enable(INDENT_OUTPUT)
+                .setSerializationInclusion(NON_NULL)
+                .registerModule(new Hibernate4Module());
+        bootstrap.addBundle(xmlBundle);
     }
 
     @Override

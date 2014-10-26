@@ -1,4 +1,4 @@
-# Dropwizard XML Provider
+# Dropwizard XML Bundle
 [Dropwizard](https://github.com/dropwizard/dropwizard) extension for high performance processing and validation of XML.
 
 Uses:

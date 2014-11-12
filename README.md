@@ -48,7 +48,7 @@ Or Gradle:
     
 Add the XMLBundle
 
-    bootstrap.addBundle(new XMLBundle());
+    bootstrap.addBundle(new XmlBundle());
 
 Annotate your Resources:
 

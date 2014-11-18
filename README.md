@@ -28,7 +28,7 @@ You can add the dependency to your project by Maven:
             <id>jcenter</id>
             <url>http://jcenter.bintray.com</url>
         </repository>
-    <repositories>
+    </repositories>
     <dependency>
         <groupId>com.yunspace.dropwizard</groupId>
         <artifactId>dropwizard-xml</artifactId>
@@ -48,7 +48,7 @@ Or Gradle:
     
 Add the XMLBundle
 
-    bootstrap.addBundle(new XMLBundle());
+    bootstrap.addBundle(new XmlBundle());
 
 Annotate your Resources:
 

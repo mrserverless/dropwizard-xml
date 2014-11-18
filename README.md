@@ -66,7 +66,7 @@ Use validation/ignore annotations as you would normally:
 
 You can further custom the behaviour of your XML Mapper by passing in a JacksonXmlModule:
 
-    bootstrap.addBundle(new XMLBundle(jacksonXmlModule));
+    bootstrap.addBundle(new XmlBundle(jacksonXmlModule));
 
 Or enable various serialisation/deserialisation features
 

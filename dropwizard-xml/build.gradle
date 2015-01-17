@@ -64,8 +64,7 @@ bintray {
     dryRun = false //Whether to run this as dry-run, without deploying
     publish = true //If version should be auto published after an upload
     pkg {
-        repo = 'com.yunspace.dropwizard'
-//        userOrg = 'myorg' //An optional organization name when the repo belongs to one of the user's orgs
+        repo = 'dropwizard'
         name = 'dropwizard-xml'
         desc = 'Dropwizard bundle for processing and validation XML'
         websiteUrl = 'https://github.com/yunspace/dropwizard-xml'

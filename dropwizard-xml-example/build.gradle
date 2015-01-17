@@ -1,5 +1,7 @@
-apply plugin: 'com.github.johnrengelman.shadow'
-apply plugin: 'application'
+plugins {
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '1.2.0'
+}
 
 mainClassName = 'com.yunspace.dropwizard.xml.example.PirateApplication'
 
@@ -13,10 +15,6 @@ dependencies {
     // test
     testCompile 'junit:junit:4.11'
     compile 'io.dropwizard:dropwizard-testing:' + dropwizardVersion
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.1'
 }
 
 shadowJar {

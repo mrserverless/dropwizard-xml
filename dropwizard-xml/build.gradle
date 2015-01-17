@@ -1,12 +1,14 @@
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'maven-publish'
+plugins {
+    id 'maven-publish'
+    id "com.jfrog.bintray" version "1.0"
+}
 
 dependencies {
     //dropwizard
     compile 'io.dropwizard:dropwizard-core:' + dropwizardVersion
 
     //jackson
-    compile 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider:' + xmlProviderVersion
+    compile 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider:' + jacksonVersion
     compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:' + jacksonVersion
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-jdk7:' + jacksonVersion
 
@@ -15,38 +17,50 @@ dependencies {
     compile 'org.codehaus.woodstox:stax2-api:' + woodstoxStaxVersion
 }
 
-// custom tasks for creating source jars
+// custom tasks for creating source/javadoc jars
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
     from sourceSets.main.allSource
 }
 
-// add javadoc/source jar tasks as artifacts
-artifacts {
-    archives sourcesJar
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
 }
 
-repositories {
-    jcenter()
+// add javadoc/source jar tasks as artifacts
+artifacts {
+    archives sourcesJar, javadocJar
 }
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
+            pom.withXml {
+                asNode().dependencies.'*'.findAll() {
+                    it.scope.text() == 'runtime' && project.configurations.compile.allDependencies.find { dep ->
+                        dep.name == it.artifactId.text()
+                    }
+                }.each() {
+                    it.scope*.value = 'compile'
+                }
+            }
             from components.java
-
             artifact sourcesJar {
                 classifier "sources"
+            }
+            artifact javadocJar {
+                classifier "javadoc"
             }
         }
     }
 }
 
 bintray {
-    user = 'yunspace'
-    key = ''
+    user = bintrayUser
+    key = bintrayApiKey
 
-    publications = ['mavenJava']
+    publications = ['mavenJava'] //When uploading Maven-based publication files
 
     dryRun = false //Whether to run this as dry-run, without deploying
     publish = true //If version should be auto published after an upload

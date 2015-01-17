@@ -6,7 +6,7 @@ Uses:
 * [Hibernate Validator](http://hibernate.org/validator/) same Dropwizard validation behvaiour for XML 
 
 ## Status
-
+[![Build Status](https://snap-ci.com/yunspace/dropwizard-xml/branch/master/build_image)](https://snap-ci.com/yunspace/dropwizard-xml/branch/master)
 <a href='https://bintray.com/yunspace/dropwizard/dropwizard-xml/view?source=watch' alt='Get automatic notifications about new "dropwizard-xml" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_color.png'></a>
 [![Download](https://api.bintray.com/packages/yunspace/dropwizard/dropwizard-xml/images/download.svg)](https://bintray.com/yunspace/dropwizard/dropwizard-xml/_latestVersion)
 

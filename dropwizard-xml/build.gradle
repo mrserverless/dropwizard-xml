@@ -1,11 +1,14 @@
-apply plugin: 'com.jfrog.bintray'
+plugins {
+    id 'maven-publish'
+    id "com.jfrog.bintray" version "1.0"
+}
 
 dependencies {
     //dropwizard
     compile 'io.dropwizard:dropwizard-core:' + dropwizardVersion
 
     //jackson
-    compile 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider:' + xmlProviderVersion
+    compile 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider:' + jacksonVersion
     compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:' + jacksonVersion
 
     //woodstox
@@ -13,11 +16,50 @@ dependencies {
     compile 'org.codehaus.woodstox:stax2-api:' + woodstoxStaxVersion
 }
 
-bintray {
-    user = 'bintray_user'
-    key = 'bintray_api_key'
+// custom tasks for creating source/javadoc jars
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
 
-    publications = ['mavenStuff'] //When uploading Maven-based publication files
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+// add javadoc/source jar tasks as artifacts
+artifacts {
+    archives sourcesJar, javadocJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            pom.withXml {
+                asNode().dependencies.'*'.findAll() {
+                    it.scope.text() == 'runtime' && project.configurations.compile.allDependencies.find { dep ->
+                        dep.name == it.artifactId.text()
+                    }
+                }.each() {
+                    it.scope*.value = 'compile'
+                }
+            }
+            from components.java
+            artifact sourcesJar {
+                classifier "sources"
+            }
+            artifact javadocJar {
+                classifier "javadoc"
+            }
+        }
+    }
+}
+
+bintray {
+    user = bintrayUser
+    key = bintrayApiKey
+
+    publications = ['mavenJava'] //When uploading Maven-based publication files
 
     dryRun = false //Whether to run this as dry-run, without deploying
     publish = true //If version should be auto published after an upload

@@ -6,6 +6,10 @@ Uses:
 * [Hibernate Validator](http://hibernate.org/validator/) same Dropwizard validation behvaiour for XML 
 
 ## Status
+This project is built using [Snap-CI](https://www.snap-ci.com/) to enable [Continuous Delivery](http://www.thoughtworks.com/continuous-delivery).
+There are no mysterious snapshots, every time the tests pass a new release tagged and uploaded to bintray, so you know exactly what you are pulling down.
+See below for the latest version:
+
 [![Build Status](https://snap-ci.com/yunspace/dropwizard-xml/branch/master/build_image)](https://snap-ci.com/yunspace/dropwizard-xml/branch/master)
 <a href='https://bintray.com/yunspace/dropwizard/dropwizard-xml/view?source=watch' alt='Get automatic notifications about new "dropwizard-xml" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_color.png'></a>
 [![Download](https://api.bintray.com/packages/yunspace/dropwizard/dropwizard-xml/images/download.svg)](https://bintray.com/yunspace/dropwizard/dropwizard-xml/_latestVersion)
@@ -15,11 +19,13 @@ This project is pegged against Dropwizard's release number and try to use the sa
 
 | Dropwizard-XML   | Dropwizard     | Jackson   | Woodstox | Stax  |
 | ---------------- | -------------- | --------- | -------- |------ |
-| 0.7.1-3          | 0.7.1          | 2.3.3     | 4.1.4    | 3.1.1 |
-| 0.8.0-rc1-1      | 0.8.0-rc1      | 2.4.1     | 4.4.9    | 3.1.4 |
+| 0.7.1-X          | 0.7.1          | 2.3.3     | 4.1.4    | 3.1.1 |
+| 0.8.0-rc1-X      | 0.8.0-rc1      | 2.4.1     | 4.4.9    | 3.1.4 |
+| 0.8.0-rc2-X      | 0.8.0-rc2      | 2.5.0     |    transitive    |
+
 
 ## Usage
-Dropwizard XML Provider is hosted by [JCenter](https://bintray.com/bintray/jcenter).
+Dropwizard XML Provider is hosted by [Bintray JCenter](https://bintray.com/bintray/jcenter).
 
 You can add the dependency to your project by Maven:
 
@@ -32,7 +38,7 @@ You can add the dependency to your project by Maven:
     <dependency>
         <groupId>com.yunspace.dropwizard</groupId>
         <artifactId>dropwizard-xml</artifactId>
-        <version>0.7.1-2</version>
+        <version>${dropwizard-xml-version}</version>
         <scope>compile</scope>
     </dependency>
 
@@ -43,7 +49,7 @@ Or Gradle:
         mavenCentral()
     }
     dependencies {
-        compile 'com.yunspace.dropwizard:dropwizard-xml:0.7.1-2
+        compile "com.yunspace.dropwizard:dropwizard-xml:${dropwizardXmlVersion"
     }
     
 Add the XMLBundle

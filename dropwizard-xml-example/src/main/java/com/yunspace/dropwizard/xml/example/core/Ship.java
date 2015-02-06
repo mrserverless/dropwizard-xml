@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -16,16 +14,6 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 @Entity
 @Table(name = "ships")
-@NamedQueries({
-        @NamedQuery(
-                name = "com.yunspace.helloxml.core.Ship.findAll",
-                query = "SELECT s FROM Ship s"
-        ),
-        @NamedQuery(
-                name = "com.yunspace.helloxml.core.Ship.findById",
-                query = "SELECT s FROM Ship s WHERE s.shipId = :id"
-        )
-})
 @JacksonXmlRootElement(localName = "Ship")
 public class Ship {
 

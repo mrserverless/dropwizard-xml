@@ -8,8 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,16 +17,6 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 @Entity
 @Table(name = "pirates")
-@NamedQueries({
-        @NamedQuery(
-                name = "com.yunspace.helloxml.core.Pirate.findAll",
-                query = "SELECT DISTINCT p FROM Pirate p LEFT JOIN FETCH p.ships s WHERE p.pirateId = s.shipCaptain"
-        ),
-        @NamedQuery(
-                name = "com.yunspace.helloxml.core.Pirate.findById",
-                query = "SELECT p FROM Pirate p JOIN FETCH p.ships s WHERE p.pirateId = s.shipCaptain AND p.pirateId = :id"
-        )
-})
 @JacksonXmlRootElement(localName = "Pirate")
 public class Pirate {
     @Id

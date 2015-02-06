@@ -23,7 +23,6 @@ public class PirateDAO extends AbstractDAO<Pirate> {
     }
 
     public List<Pirate> findAll() {
-//        return list(namedQuery("com.yunspace.helloxml.core.Pirate.findAll"));
         return currentSession().createCriteria( Pirate.class ).list();
     }
 

@@ -23,7 +23,7 @@ public class ShipDAO extends AbstractDAO<Ship> {
     }
 
     public List<Ship> findAll() {
-        return list(namedQuery("com.yunspace.helloxml.core.Ship.findAll"));
+        return currentSession().createCriteria( Ship.class ).list();
     }
 
     public void update(Ship ship) {

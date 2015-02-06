@@ -4,17 +4,14 @@ plugins {
 }
 
 dependencies {
-    //dropwizard
-    compile 'io.dropwizard:dropwizard-core:' + dropwizardVersion
+    compile "io.dropwizard:dropwizard-core:${dropwizardVersion}"
+    compile "com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider:${jacksonVersion}"
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonVersion}"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-jdk7:${jacksonVersion}"
 
-    //jackson
-    compile 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider:' + jacksonVersion
-    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:' + jacksonVersion
-    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jdk7:' + jacksonVersion
-
-    //woodstox
-    compile 'org.codehaus.woodstox:woodstox-core-asl:' + woodstoxVersion
-    compile 'org.codehaus.woodstox:stax2-api:' + woodstoxStaxVersion
+    testCompile 'org.mockito:mockito-all:1.9.5'
+    testCompile 'org.easytesting:fest-assert-core:2.0M10'
+    testCompile 'junit:junit:4.12'
 }
 
 // custom tasks for creating source/javadoc jars

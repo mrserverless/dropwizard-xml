@@ -1,26 +1,21 @@
 plugins {
     id 'application'
-    id 'com.github.johnrengelman.shadow' version '1.2.0'
+    id 'com.github.johnrengelman.shadow' version '1.2.1'
 }
 
 mainClassName = 'com.yunspace.dropwizard.xml.example.PirateApplication'
 
 dependencies {
-    // dropwizard
-    compile 'io.dropwizard:dropwizard-core:' + dropwizardVersion
-    compile 'io.dropwizard:dropwizard-hibernate:' + dropwizardVersion
-    compile 'com.yunspace.dropwizard:dropwizard-xml:' + version
-    compile 'com.h2database:h2:' + h2Version
-
-    // test
-    testCompile 'junit:junit:4.11'
-    compile 'io.dropwizard:dropwizard-testing:' + dropwizardVersion
+    compile project(':dropwizard-xml')
+    compile "io.dropwizard:dropwizard-core:${dropwizardVersion}"
+    compile "io.dropwizard:dropwizard-hibernate:${dropwizardVersion}"
+    compile "com.h2database:h2:${h2Version}"
 }
 
 shadowJar {
     baseName "dropwizard-xml-example"
     archiveName "dropwizard-xml-example.jar"
-    destinationDir project.buildDir
+    destinationDir buildDir
 
     manifest {
         attributes 'Main-Class': mainClassName

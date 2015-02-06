@@ -1,16 +1,17 @@
 package com.yunspace.dropwizard.xml.jersey.jackson.xml;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -27,39 +28,30 @@ public class UnwrappedAttributeTest {
 
         public Root() {}
 
-        @JacksonXmlProperty(localName = "unwrapped")
+        @JacksonXmlProperty
         @JacksonXmlElementWrapper(useWrapping = false)
         public List<UnwrappedElement> unwrapped;
 
-        @JacksonXmlProperty(localName = "unwrapped")
-        public String name2;
+        public String name;
 
     }
 
     @JacksonXmlRootElement(localName = "unwrapped")
     public static class UnwrappedElement {
 
-        public UnwrappedElement() {
-            // for Jackson deserialization
-        }
-
-        public UnwrappedElement (String id, String name) {
-            this.id = id;
-            this.name = name;
-        }
-
-        @JacksonXmlProperty(isAttribute = true, localName = "id")
+        @JacksonXmlProperty(isAttribute = true)
         public String id;
 
-        @JacksonXmlProperty(isAttribute = true, localName = "type")
-        public String name;
+        @JacksonXmlProperty(isAttribute = true)
+        public String type;
+
     }
 
     protected final XmlMapper xmlMapper = new XmlMapper();
     protected final String rootXml =
             "<root>"  + System.lineSeparator() +
-                    "  <unwrapped id=\"1\" name=\"string\"/>"  + System.lineSeparator() +
-                    "  <name2>text</name2>"  + System.lineSeparator() +
+                    "  <unwrapped id=\"1\" type=\"string\"/>"  + System.lineSeparator() +
+                    "  <name>text</name>"  + System.lineSeparator() +
             "</root>";
 
     protected final Root rootObject = new Root();
@@ -68,10 +60,11 @@ public class UnwrappedAttributeTest {
     public void setUp() {
         xmlMapper.enable(SerializationFeature.INDENT_OUTPUT).registerModule(new JaxbAnnotationModule());
 
-        rootObject.unwrapped = Arrays.asList(
-                new UnwrappedElement("1", "string")
-        );
-        rootObject.name2 = "text";
+        UnwrappedElement unwrapped = new UnwrappedElement();
+        unwrapped.id="1";
+        unwrapped.type="string";
+        rootObject.unwrapped = Arrays.asList(unwrapped);
+        rootObject.name = "text";
     }
 
     @Test

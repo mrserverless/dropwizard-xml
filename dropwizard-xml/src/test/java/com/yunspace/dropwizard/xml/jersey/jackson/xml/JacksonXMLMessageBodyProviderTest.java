@@ -20,7 +20,6 @@ import org.fest.assertions.api.Assertions;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assume;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -50,6 +49,7 @@ public class JacksonXMLMessageBodyProviderTest {
     }
 
     public interface Partial1 {}
+
     public interface Partial2 {}
 
     public static class PartialExample {
@@ -68,25 +68,24 @@ public class JacksonXMLMessageBodyProviderTest {
 
         @JacksonXmlElementWrapper(useWrapping = true)
         @JacksonXmlProperty(localName = "wrappedList")
-        List<String>wrappedList;
+        List<String> wrappedList;
 
         @JacksonXmlElementWrapper(useWrapping = false)
         @JacksonXmlProperty()
-        List<String>unwrappedList;
+        List<String> unwrappedList;
 
         static final String sampleXml =
-                "<ListExample>" +
-                "  <wrappedList>\n" +
-                "    <wrappedList>1</wrappedList>\n" +
-                "    <wrappedList>2</wrappedList>\n" +
-                "    <wrappedList>3</wrappedList>\n" +
-                "  </wrappedList>\n" +
-                "  <unwrappedList>4</unwrappedList>\n" +
-                "  <unwrappedList>5</unwrappedList>\n" +
-                "  <unwrappedList>6</unwrappedList>\n" +
-                "</ListExample>";
+                "<ListExample>\n"
+                + "  <unwrappedList>4</unwrappedList>\n"
+                + "  <unwrappedList>5</unwrappedList>\n"
+                + "  <unwrappedList>6</unwrappedList>\n"
+                + "  <wrappedList>\n"
+                + "    <wrappedList>1</wrappedList>\n"
+                + "    <wrappedList>2</wrappedList>\n"
+                + "    <wrappedList>3</wrappedList>\n"
+                + "  </wrappedList>\n"
+                + "</ListExample>";
     }
-
 
     public static class AttributeExample {
 
@@ -120,8 +119,8 @@ public class JacksonXMLMessageBodyProviderTest {
 
     @Before
     public void setUp() throws Exception {
-        mapper.enable( INDENT_OUTPUT );
-        Assume.assumeThat( Locale.getDefault().getLanguage(), CoreMatchers.is( "en" ) );
+        mapper.enable(INDENT_OUTPUT);
+        Assume.assumeThat(Locale.getDefault().getLanguage(), CoreMatchers.is("en"));
     }
 
     @Test
@@ -185,9 +184,8 @@ public class JacksonXMLMessageBodyProviderTest {
                 .isEqualTo(1);
     }
 
-
     @Test
-    public void deserializesRequestList()  throws Exception {
+    public void deserializesRequestList() throws Exception {
 
         final ByteArrayInputStream requestList = new ByteArrayInputStream((
                 ListExample.sampleXml).getBytes());
@@ -236,15 +234,15 @@ public class JacksonXMLMessageBodyProviderTest {
     public void returnsPartialValidatedRequestEntities() throws Exception {
         final Validated valid = Mockito.mock(Validated.class);
         Mockito.doReturn(Validated.class).when(valid).annotationType();
-        Mockito.when(valid.value()).thenReturn(new Class<?>[]{Partial1.class, Partial2.class});
+        Mockito.when(valid.value()).thenReturn(new Class<?>[] {Partial1.class, Partial2.class});
 
-
-        final ByteArrayInputStream entity = new ByteArrayInputStream("<PartialExample xmlns=\"\"><id>1</id><text>hello Cemo</text></PartialExample>".getBytes());
+        final ByteArrayInputStream entity =
+                new ByteArrayInputStream("<PartialExample xmlns=\"\"><id>1</id><text>hello Cemo</text></PartialExample>".getBytes());
         final Class<?> klass = PartialExample.class;
 
         final Object obj = provider.readFrom((Class<Object>) klass,
                 PartialExample.class,
-                new Annotation[]{valid},
+                new Annotation[] {valid},
                 MediaType.APPLICATION_XML_TYPE,
                 new MultivaluedHashMap<String, String>(),
                 entity);
@@ -260,14 +258,14 @@ public class JacksonXMLMessageBodyProviderTest {
     public void returnsPartialValidatedByGroupRequestEntities() throws Exception {
         final Validated valid = Mockito.mock(Validated.class);
         Mockito.doReturn(Validated.class).when(valid).annotationType();
-        Mockito.when(valid.value()).thenReturn(new Class<?>[]{Partial1.class});
+        Mockito.when(valid.value()).thenReturn(new Class<?>[] {Partial1.class});
 
         final ByteArrayInputStream entity = new ByteArrayInputStream("<Example xmlns=\"\"><id>1</id></Example>".getBytes());
         final Class<?> klass = PartialExample.class;
 
         final Object obj = provider.readFrom((Class<Object>) klass,
                 PartialExample.class,
-                new Annotation[]{valid},
+                new Annotation[] {valid},
                 MediaType.APPLICATION_XML_TYPE,
                 new MultivaluedHashMap<String, String>(),
                 entity);
@@ -283,7 +281,7 @@ public class JacksonXMLMessageBodyProviderTest {
     public void throwsAnInvalidEntityExceptionForPartialValidatedRequestEntities() throws Exception {
         final Validated valid = Mockito.mock(Validated.class);
         Mockito.doReturn(Validated.class).when(valid).annotationType();
-        Mockito.when(valid.value()).thenReturn(new Class<?>[]{Partial1.class, Partial2.class});
+        Mockito.when(valid.value()).thenReturn(new Class<?>[] {Partial1.class, Partial2.class});
 
         final ByteArrayInputStream entity = new ByteArrayInputStream("<Example xmlns=\"\"><id>1</id></Example>".getBytes());
 
@@ -291,12 +289,12 @@ public class JacksonXMLMessageBodyProviderTest {
             final Class<?> klass = PartialExample.class;
             provider.readFrom((Class<Object>) klass,
                     PartialExample.class,
-                    new Annotation[]{ valid },
+                    new Annotation[] {valid},
                     MediaType.APPLICATION_XML_TYPE,
                     new MultivaluedHashMap<String, String>(),
                     entity);
             Assertions.failBecauseExceptionWasNotThrown(ConstraintViolationException.class);
-        } catch(ConstraintViolationException e) {
+        } catch (ConstraintViolationException e) {
             Assertions.assertThat(ConstraintViolations.formatUntyped(e.getConstraintViolations()))
                     .containsOnly("text may not be null (was null)");
         }
@@ -312,7 +310,7 @@ public class JacksonXMLMessageBodyProviderTest {
 
         final Object obj = provider.readFrom((Class<Object>) klass,
                 Example.class,
-                new Annotation[]{ valid },
+                new Annotation[] {valid},
                 MediaType.APPLICATION_XML_TYPE,
                 new MultivaluedHashMap<String, String>(),
                 entity);
@@ -335,7 +333,7 @@ public class JacksonXMLMessageBodyProviderTest {
             final Class<?> klass = Example.class;
             provider.readFrom((Class<Object>) klass,
                     Example.class,
-                    new Annotation[]{ valid },
+                    new Annotation[] {valid},
                     MediaType.APPLICATION_XML_TYPE,
                     new MultivaluedHashMap<String, String>(),
                     entity);
@@ -385,13 +383,12 @@ public class JacksonXMLMessageBodyProviderTest {
         Assertions.assertThat(output.toString())
                 .isEqualTo(
                         "<Example>" + System.lineSeparator() +
-                        "  <id>500</id>" + System.lineSeparator() +
-                        "</Example>");
+                                "  <id>500</id>" + System.lineSeparator() +
+                                "</Example>");
     }
 
-    @Ignore // test ignored for dropwizard 0.7.1 using Jackson 2.3.3 due to issue fixed in Jackson 2.4.0+
     @Test
-    public void serializesResponseList()  throws Exception {
+    public void serializesResponseList() throws Exception {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
 
         final ListExample listExample = new ListExample();

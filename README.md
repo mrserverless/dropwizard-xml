@@ -1,4 +1,6 @@
 # Dropwizard XML Bundle
+
+[![Join the chat at https://gitter.im/yunspace/dropwizard-xml](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/yunspace/dropwizard-xml?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [Dropwizard](https://github.com/dropwizard/dropwizard) extension for high performance processing and validation of XML.
 
 Uses:

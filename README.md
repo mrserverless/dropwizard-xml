@@ -1,6 +1,10 @@
 # Dropwizard XML Bundle
 
 [![Join the chat at https://gitter.im/yunspace/dropwizard-xml](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/yunspace/dropwizard-xml?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://snap-ci.com/yunspace/dropwizard-xml/branch/master/build_image)](https://snap-ci.com/yunspace/dropwizard-xml/branch/master)
+[![Download](https://api.bintray.com/packages/yunspace/dropwizard/dropwizard-xml/images/download.svg)](https://bintray.com/yunspace/dropwizard/dropwizard-xml/_latestVersion)
+<a href='https://bintray.com/yunspace/dropwizard/dropwizard-xml/view?source=watch' alt='Get automatic notifications about new "dropwizard-xml" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_color.png'></a>
+
 [Dropwizard](https://github.com/dropwizard/dropwizard) extension for high performance processing and validation of XML.
 
 Uses:
@@ -9,16 +13,9 @@ Uses:
 
 ## Status
 This project is built using [Snap-CI](https://www.snap-ci.com/) to enable [Continuous Delivery](http://www.thoughtworks.com/continuous-delivery).
-There are no mysterious snapshots, every time the tests pass a new release tagged and uploaded to bintray, so you know exactly what you are pulling down.
-See below for the latest version:
+There are no mysterious snapshots, every time the tests pass a new release tagged and uploaded to bintray, so you know exactly what you are pulling down. 
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/yunspace/dropwizard-xml?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![Build Status](https://snap-ci.com/yunspace/dropwizard-xml/branch/master/build_image)](https://snap-ci.com/yunspace/dropwizard-xml/branch/master)
-<a href='https://bintray.com/yunspace/dropwizard/dropwizard-xml/view?source=watch' alt='Get automatic notifications about new "dropwizard-xml" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_color.png'></a>
-[![Download](https://api.bintray.com/packages/yunspace/dropwizard/dropwizard-xml/images/download.svg)](https://bintray.com/yunspace/dropwizard/dropwizard-xml/_latestVersion)
-
-## Dependencies
-This project is pegged against Dropwizard's release number and try to use the same Jackson dependency to avoid conflicts.
+Versions are pegged against Dropwizard's release number and try to use the same Jackson dependency to avoid conflicts. See above badges for latest version to use. The table below give an indication of dependencies:
 
 | Dropwizard-XML   | Dropwizard     | Jackson   | Woodstox | Stax  |
 | ---------------- | -------------- | --------- | -------- |------ |

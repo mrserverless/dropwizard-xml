@@ -10,6 +10,7 @@ This project is built using [Snap-CI](https://www.snap-ci.com/) to enable [Conti
 There are no mysterious snapshots, every time the tests pass a new release tagged and uploaded to bintray, so you know exactly what you are pulling down.
 See below for the latest version:
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/yunspace/dropwizard-xml?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Build Status](https://snap-ci.com/yunspace/dropwizard-xml/branch/master/build_image)](https://snap-ci.com/yunspace/dropwizard-xml/branch/master)
 <a href='https://bintray.com/yunspace/dropwizard/dropwizard-xml/view?source=watch' alt='Get automatic notifications about new "dropwizard-xml" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_color.png'></a>
 [![Download](https://api.bintray.com/packages/yunspace/dropwizard/dropwizard-xml/images/download.svg)](https://bintray.com/yunspace/dropwizard/dropwizard-xml/_latestVersion)

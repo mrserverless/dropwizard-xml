@@ -13,7 +13,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * this test is created for Jackson Dataformat XML
@@ -77,7 +77,10 @@ public class UnwrappedAttributeTest {
 
         Root rootResult =  xmlMapper.readValue(rootXml, Root.class);
 
-        assertThat(rootResult).isEqualsToByComparingFields(rootObject);
+        assertThat(rootResult.name).isEqualTo(rootObject.name);
+        assertThat(rootResult.unwrapped).hasSize(1);
+        assertThat(rootResult.unwrapped.get(0)).isEqualToComparingFieldByField(rootObject.unwrapped.get(0));
+
     }
 }
 

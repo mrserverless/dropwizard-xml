@@ -16,7 +16,6 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedHashMap;
 
-import org.fest.assertions.api.Assertions;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assume;
 import org.junit.Before;
@@ -37,7 +36,8 @@ import io.dropwizard.validation.ConstraintViolations;
 import io.dropwizard.validation.Validated;
 
 import static com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT;
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 
 @SuppressWarnings("unchecked")
 public class JacksonXMLMessageBodyProviderTest {
@@ -293,7 +293,7 @@ public class JacksonXMLMessageBodyProviderTest {
                     MediaType.APPLICATION_XML_TYPE,
                     new MultivaluedHashMap<String, String>(),
                     entity);
-            Assertions.failBecauseExceptionWasNotThrown(ConstraintViolationException.class);
+            failBecauseExceptionWasNotThrown(ConstraintViolationException.class);
         } catch (ConstraintViolationException e) {
             assertThat(ConstraintViolations.formatUntyped(e.getConstraintViolations()))
                     .containsOnly("text may not be null");
@@ -337,7 +337,7 @@ public class JacksonXMLMessageBodyProviderTest {
                     MediaType.APPLICATION_XML_TYPE,
                     new MultivaluedHashMap<String, String>(),
                     entity);
-            Assertions.failBecauseExceptionWasNotThrown(ConstraintViolationException.class);
+            failBecauseExceptionWasNotThrown(ConstraintViolationException.class);
         } catch (ConstraintViolationException e) {
             assertThat(ConstraintViolations.formatUntyped(e.getConstraintViolations()))
                     .containsOnly("id must be greater than or equal to 0");
@@ -356,7 +356,7 @@ public class JacksonXMLMessageBodyProviderTest {
                     MediaType.APPLICATION_XML_TYPE,
                     new MultivaluedHashMap<String, String>(),
                     entity);
-            Assertions.failBecauseExceptionWasNotThrown(WebApplicationException.class);
+            failBecauseExceptionWasNotThrown(WebApplicationException.class);
         } catch (JsonProcessingException e) {
             assertThat(e.getMessage())
                     .startsWith("Can not construct instance of java.lang.Integer from String value '-1d': " +

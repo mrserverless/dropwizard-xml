@@ -9,9 +9,7 @@ dependencies {
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonVersion}"
     compile "com.fasterxml.jackson.datatype:jackson-datatype-jdk7:${jacksonVersion}"
 
-    testCompile 'org.mockito:mockito-all:1.9.5'
-    testCompile 'org.easytesting:fest-assert-core:2.0M10'
-    testCompile 'junit:junit:4.12'
+    testCompile 'io.dropwizard:dropwizard-testing:${dropwizardVersion}'
 }
 
 // custom tasks for creating source/javadoc jars

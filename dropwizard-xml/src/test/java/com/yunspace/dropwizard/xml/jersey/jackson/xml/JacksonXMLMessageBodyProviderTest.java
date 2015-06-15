@@ -37,6 +37,7 @@ import io.dropwizard.validation.ConstraintViolations;
 import io.dropwizard.validation.Validated;
 
 import static com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 @SuppressWarnings("unchecked")
 public class JacksonXMLMessageBodyProviderTest {
@@ -125,43 +126,43 @@ public class JacksonXMLMessageBodyProviderTest {
 
     @Test
     public void readsDeserializableTypes() throws Exception {
-        Assertions.assertThat(provider.isReadable(Example.class, null, null, null))
+        assertThat(provider.isReadable(Example.class, null, null, null))
                 .isTrue();
     }
 
     @Test
     public void writesSerializableTypes() throws Exception {
-        Assertions.assertThat(provider.isWriteable(Example.class, null, null, null))
+        assertThat(provider.isWriteable(Example.class, null, null, null))
                 .isTrue();
     }
 
     @Test
     public void doesNotWriteIgnoredTypes() throws Exception {
-        Assertions.assertThat(provider.isWriteable(Ignorable.class, null, null, null))
+        assertThat(provider.isWriteable(Ignorable.class, null, null, null))
                 .isFalse();
     }
 
     @Test
     public void writesUnIgnoredTypes() throws Exception {
-        Assertions.assertThat(provider.isWriteable(NonIgnorable.class, null, null, null))
+        assertThat(provider.isWriteable(NonIgnorable.class, null, null, null))
                 .isTrue();
     }
 
     @Test
     public void doesNotReadIgnoredTypes() throws Exception {
-        Assertions.assertThat(provider.isReadable(Ignorable.class, null, null, null))
+        assertThat(provider.isReadable(Ignorable.class, null, null, null))
                 .isFalse();
     }
 
     @Test
     public void readsUnIgnoredTypes() throws Exception {
-        Assertions.assertThat(provider.isReadable(NonIgnorable.class, null, null, null))
+        assertThat(provider.isReadable(NonIgnorable.class, null, null, null))
                 .isTrue();
     }
 
     @Test
     public void isChunked() throws Exception {
-        Assertions.assertThat(provider.getSize(null, null, null, null, null))
+        assertThat(provider.getSize(null, null, null, null, null))
                 .isEqualTo(-1);
     }
 
@@ -177,10 +178,10 @@ public class JacksonXMLMessageBodyProviderTest {
                 new MultivaluedHashMap<String, String>(),
                 entity);
 
-        Assertions.assertThat(obj)
+        assertThat(obj)
                 .isInstanceOf(Example.class);
 
-        Assertions.assertThat(((Example) obj).id)
+        assertThat(((Example) obj).id)
                 .isEqualTo(1);
     }
 
@@ -198,13 +199,13 @@ public class JacksonXMLMessageBodyProviderTest {
                 new MultivaluedHashMap<String, String>(),
                 requestList);
 
-        Assertions.assertThat(obj)
+        assertThat(obj)
                 .isInstanceOf(ListExample.class);
 
-        Assertions.assertThat(((ListExample) obj).unwrappedList)
+        assertThat(((ListExample) obj).unwrappedList)
                 .isEqualTo(Arrays.asList("4", "5", "6"));
 
-        Assertions.assertThat(((ListExample) obj).wrappedList)
+        assertThat(((ListExample) obj).wrappedList)
                 .isEqualTo(Arrays.asList("1", "2", "3"));
     }
 
@@ -222,12 +223,11 @@ public class JacksonXMLMessageBodyProviderTest {
                 new MultivaluedHashMap<String, String>(),
                 entity);
 
-        Assertions.assertThat(obj)
+        assertThat(obj)
                 .isInstanceOf(AttributeExample.class);
 
-        Assertions.assertThat(((AttributeExample) obj).version)
+        assertThat(((AttributeExample) obj).version)
                 .isEqualTo("1.0");
-        //        assertThat(((AttributeAndTextExample) obj).value).isEqualTo("text");
     }
 
     @Test
@@ -247,10 +247,10 @@ public class JacksonXMLMessageBodyProviderTest {
                 new MultivaluedHashMap<String, String>(),
                 entity);
 
-        Assertions.assertThat(obj)
+        assertThat(obj)
                 .isInstanceOf(PartialExample.class);
 
-        Assertions.assertThat(((PartialExample) obj).id)
+        assertThat(((PartialExample) obj).id)
                 .isEqualTo(1);
     }
 
@@ -270,10 +270,10 @@ public class JacksonXMLMessageBodyProviderTest {
                 new MultivaluedHashMap<String, String>(),
                 entity);
 
-        Assertions.assertThat(obj)
+        assertThat(obj)
                 .isInstanceOf(PartialExample.class);
 
-        Assertions.assertThat(((PartialExample) obj).id)
+        assertThat(((PartialExample) obj).id)
                 .isEqualTo(1);
     }
 
@@ -295,8 +295,8 @@ public class JacksonXMLMessageBodyProviderTest {
                     entity);
             Assertions.failBecauseExceptionWasNotThrown(ConstraintViolationException.class);
         } catch (ConstraintViolationException e) {
-            Assertions.assertThat(ConstraintViolations.formatUntyped(e.getConstraintViolations()))
-                    .containsOnly("text may not be null (was null)");
+            assertThat(ConstraintViolations.formatUntyped(e.getConstraintViolations()))
+                    .containsOnly("text may not be null");
         }
     }
 
@@ -315,10 +315,10 @@ public class JacksonXMLMessageBodyProviderTest {
                 new MultivaluedHashMap<String, String>(),
                 entity);
 
-        Assertions.assertThat(obj)
+        assertThat(obj)
                 .isInstanceOf(Example.class);
 
-        Assertions.assertThat(((Example) obj).id)
+        assertThat(((Example) obj).id)
                 .isEqualTo(1);
     }
 
@@ -339,8 +339,8 @@ public class JacksonXMLMessageBodyProviderTest {
                     entity);
             Assertions.failBecauseExceptionWasNotThrown(ConstraintViolationException.class);
         } catch (ConstraintViolationException e) {
-            Assertions.assertThat(ConstraintViolations.formatUntyped(e.getConstraintViolations()))
-                    .containsOnly("id must be greater than or equal to 0 (was -1)");
+            assertThat(ConstraintViolations.formatUntyped(e.getConstraintViolations()))
+                    .containsOnly("id must be greater than or equal to 0");
         }
     }
 
@@ -358,7 +358,7 @@ public class JacksonXMLMessageBodyProviderTest {
                     entity);
             Assertions.failBecauseExceptionWasNotThrown(WebApplicationException.class);
         } catch (JsonProcessingException e) {
-            Assertions.assertThat(e.getMessage())
+            assertThat(e.getMessage())
                     .startsWith("Can not construct instance of java.lang.Integer from String value '-1d': " +
                             "not a valid Integer value");
 
@@ -380,7 +380,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 new MultivaluedHashMap<String, Object>(),
                 output);
 
-        Assertions.assertThat(output.toString())
+        assertThat(output.toString())
                 .isEqualTo(
                         "<Example>" + System.lineSeparator() +
                                 "  <id>500</id>" + System.lineSeparator() +
@@ -403,7 +403,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 new MultivaluedHashMap<String, Object>(),
                 output);
 
-        Assertions.assertThat(output.toString())
+        assertThat(output.toString())
                 .isEqualTo(ListExample.sampleXml);
 
     }
@@ -423,7 +423,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 new MultivaluedHashMap<String, Object>(),
                 output);
 
-        Assertions.assertThat(output.toString())
+        assertThat(output.toString())
                 .isEqualTo("<AttributeExample version=\"2.0\"/>");
     }
 
@@ -442,7 +442,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 new MultivaluedHashMap<String, Object>(),
                 output);
 
-        Assertions.assertThat(output.toString())
+        assertThat(output.toString())
                 .isEqualTo("<NamespaceAndText xmlns=\"lostInSpace\">hello world</NamespaceAndText>");
     }
 

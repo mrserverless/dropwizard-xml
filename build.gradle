@@ -9,6 +9,9 @@ subprojects {
     version = project.hasProperty('app_version') ? app_version : 'local'
 
     repositories {
+        maven {
+            url "http://oss.sonatype.org/content/repositories/snapshots"
+        }
         jcenter()
         mavenLocal()
     }

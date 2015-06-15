@@ -9,7 +9,7 @@ dependencies {
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonVersion}"
     compile "com.fasterxml.jackson.datatype:jackson-datatype-jdk7:${jacksonVersion}"
 
-    testCompile 'io.dropwizard:dropwizard-testing:${dropwizardVersion}'
+    testCompile "io.dropwizard:dropwizard-testing:${dropwizardVersion}"
 }
 
 // custom tasks for creating source/javadoc jars

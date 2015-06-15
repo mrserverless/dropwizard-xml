@@ -20,11 +20,9 @@ Versions are pegged against Dropwizard's release number and try to use the same 
 | Dropwizard-XML   | Dropwizard     | Jackson   | Woodstox | Stax  |
 | ---------------- | -------------- | --------- | -------- |------ |
 | 0.7.1-X          | 0.7.1          | 2.3.3     | 4.1.4    | 3.1.1 |
-| 0.8.0-rc1-X      | 0.8.0-rc1      | 2.4.1     | 4.4.9    | 3.1.4 |
-| 0.8.0-rc2-X      | 0.8.0-rc2      | 2.5.0     |    transitive    |
 | 0.8.0-X          | 0.8.0          | 2.5.1     |    transitive    |
-| 0.8.0-1-X        | 0.8.1          | 2.5.2     |    transitive    |
-| 0.9.0-1-X        | 0.9.0-SNAPSHOT | 2.5.3     |    transitive    |
+| 0.8.1-X          | 0.8.1          | 2.5.2     |    transitive    |
+| 0.9.0-X          | 0.9.0-SNAPSHOT | 2.5.3     |    transitive    |
 
 ## Usage
 Dropwizard XML Provider is hosted by [Bintray JCenter](https://bintray.com/bintray/jcenter).

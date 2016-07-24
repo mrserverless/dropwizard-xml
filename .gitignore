@@ -6,9 +6,9 @@ build
 #IntelliJ
 .idea
 bin
-*.iml
 *.ipr
 *.iws
+classes/
 
 #Eclipse-specific
 .settings/

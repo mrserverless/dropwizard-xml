@@ -7,7 +7,6 @@ dependencies {
     compile "io.dropwizard:dropwizard-core:${dropwizardVersion}"
     compile "com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider:${jacksonVersion}"
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonVersion}"
-    compile "com.fasterxml.jackson.datatype:jackson-datatype-jdk7:${jacksonVersion}"
 
     testCompile "io.dropwizard:dropwizard-testing:${dropwizardVersion}"
 }

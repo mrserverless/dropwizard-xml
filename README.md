@@ -32,7 +32,7 @@ and Jackson version combination in your classpath:
 | ---------------- | ------------------ | ---------------- |
 | 39               | 0.9.1, 0.9.2       | 2.6.3            | 
 | 39               | 0.9.3              | 2.6.7            |
-| 40+              | 1.0.0+             | 2.7.5+           |
+| 41+              | 1.0.0+             | 2.7.5+           |
 
 See [dependencies](#Dependencies) below fore more details.
 
@@ -87,7 +87,7 @@ Or Gradle:
         compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.7.5"
     }
     
-If you are using less than Dropwizard `1.0.0` and Jackson `2.7.5` you need to add [jackson-datatype-jdk7](https://github.com/FasterXML/jackson-datatype-jdk7)
+If you are using versions lesser than Dropwizard `1.0.0` and Jackson `2.7.5` you need to add [jackson-datatype-jdk7](https://github.com/FasterXML/jackson-datatype-jdk7)
 
 Maven: 
 

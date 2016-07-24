@@ -54,11 +54,14 @@ public class PirateResource {
     }
 
     @PUT
+    @Path("{pirateId}")
     @UnitOfWork
     @Consumes(MediaType.APPLICATION_XML)
-    public void updatePirate(Pirate pirate) {
-
+    @Produces(MediaType.APPLICATION_XML)
+    public Optional<Pirate> updatePirate(@PathParam("pirateId") LongParam pirateId, Pirate pirate) {
+        pirate.setPirateId(pirateId.get());
         pirateDAO.update(pirate);
+        return pirateDAO.findById(pirate.getPirateId());
     }
 
     @DELETE

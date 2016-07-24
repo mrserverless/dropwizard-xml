@@ -1,0 +1,147 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Dropwizard XML Pirates",
+		"_postman_id": "95612110-eb2e-15d0-4d6a-cecd21330b03",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Find All Ships",
+			"request": {
+				"url": "http://localhost:8080/ships",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Find All Pirates",
+			"request": {
+				"url": "http://localhost:8080/pirates",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Pirate: BlackBeard",
+			"request": {
+				"url": "http://localhost:8080/pirates/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<Pirate>\n  <NickName>RedBeard</NickName>\n  <RealName>Edward Teach</RealName>\n</Pirate>"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Pirate: BlackBeard",
+			"request": {
+				"url": "http://localhost:8080/pirates",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<Pirate>\n  <NickName>BlackBeard</NickName>\n  <RealName>Edward Teach</RealName>\n</Pirate>"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Ship: Queen Anne's Revenge",
+			"request": {
+				"url": "http://localhost:8080/ships",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<Ship shipName=\"Queen Anne's Revenge\">\n    <ShipCaptain pirateId=\"1\"/>\n</Ship>"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Ship: Adventure",
+			"request": {
+				"url": "http://localhost:8080/ships",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<Ship shipName=\"Adventure\">\n  <ShipCaptain pirateId=\"1\"/>\n</Ship>\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Pirate by Id",
+			"request": {
+				"url": "http://localhost:8080/pirates/1",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Ship",
+			"request": {
+				"url": "http://localhost:8080/ships/1",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

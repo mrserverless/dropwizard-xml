@@ -1,6 +1,6 @@
 package com.yunspace.dropwizard.xml.example;
 
-import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import com.yunspace.dropwizard.xml.XmlBundle;
 import com.yunspace.dropwizard.xml.example.core.Pirate;
 import com.yunspace.dropwizard.xml.example.core.Ship;
@@ -44,7 +44,7 @@ public class PirateApplication extends Application<PirateConfiguration> {
         xmlBundle.getXmlMapper()
                 .enable(INDENT_OUTPUT)
                 .setSerializationInclusion(NON_NULL)
-                .registerModule(new Hibernate4Module());
+                .registerModule(new Hibernate5Module());
         bootstrap.addBundle(xmlBundle);
     }
 

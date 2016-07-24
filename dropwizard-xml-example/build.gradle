@@ -7,8 +7,13 @@ mainClassName = 'com.yunspace.dropwizard.xml.example.PirateApplication'
 
 dependencies {
     compile project(':dropwizard-xml')
+
     compile "io.dropwizard:dropwizard-core:${dropwizardVersion}"
     compile "io.dropwizard:dropwizard-hibernate:${dropwizardVersion}"
+    compile "com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider:${jacksonVersion}"
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonVersion}"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-jdk7:${jacksonVersion}"
+
     compile "com.h2database:h2:${h2Version}"
 }
 

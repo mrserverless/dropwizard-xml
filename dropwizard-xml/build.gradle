@@ -4,11 +4,14 @@ plugins {
 }
 
 dependencies {
-    compile "io.dropwizard:dropwizard-core:${dropwizardVersion}"
-    compile "com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider:${jacksonVersion}"
-    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonVersion}"
-    compile "com.fasterxml.jackson.datatype:jackson-datatype-jdk7:${jacksonVersion}"
+    compileOnly "io.dropwizard:dropwizard-core:${dropwizardVersion}"
+    compileOnly "com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider:${jacksonVersion}"
+    compileOnly "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonVersion}"
+    compileOnly "com.fasterxml.jackson.datatype:jackson-datatype-jdk7:${jacksonVersion}"
 
+    testCompile "com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider:${jacksonVersion}"
+    testCompile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonVersion}"
+    testCompile "com.fasterxml.jackson.datatype:jackson-datatype-jdk7:${jacksonVersion}"
     testCompile "io.dropwizard:dropwizard-testing:${dropwizardVersion}"
 }
 

@@ -84,7 +84,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 + "    <wrappedList>2</wrappedList>\n"
                 + "    <wrappedList>3</wrappedList>\n"
                 + "  </wrappedList>\n"
-                + "</ListExample>";
+                + "</ListExample>\n";
     }
 
     private static class AttributeExample {
@@ -358,8 +358,7 @@ public class JacksonXMLMessageBodyProviderTest {
             failBecauseExceptionWasNotThrown(WebApplicationException.class);
         } catch (JsonProcessingException e) {
             assertThat(e.getMessage())
-                    .startsWith("Can not construct instance of int from String value '-1d': " +
-                            "not a valid Integer value");
+                    .startsWith("Can not construct instance of int from String value");
 
         }
     }
@@ -383,7 +382,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 .isEqualTo(
                         "<Example>" + System.lineSeparator() +
                                 "  <id>500</id>" + System.lineSeparator() +
-                                "</Example>");
+                                "</Example>" + System.lineSeparator());
     }
 
     @Test
@@ -423,7 +422,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 output);
 
         assertThat(output.toString())
-                .isEqualTo("<AttributeExample version=\"2.0\"/>");
+                .isEqualTo("<AttributeExample version=\"2.0\"/>" + System.lineSeparator());
     }
 
     @Test
@@ -442,7 +441,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 output);
 
         assertThat(output.toString())
-                .isEqualTo("<NamespaceAndText xmlns=\"lostInSpace\">hello world</NamespaceAndText>");
+                .isEqualTo("<NamespaceAndText xmlns=\"lostInSpace\">hello world</NamespaceAndText>" + System.lineSeparator());
     }
 
 }

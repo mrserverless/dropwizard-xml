@@ -35,6 +35,7 @@ public class UnwrappedAttributeTest {
         @JacksonXmlElementWrapper(useWrapping = false)
         List<UnwrappedElement> unwrapped;
 
+        @JacksonXmlProperty
         String name;
 
     }
@@ -56,17 +57,9 @@ public class UnwrappedAttributeTest {
                     "  <unwrapped id=\"1\" type=\"string\"/>"  + System.lineSeparator() +
                     "  <unwrapped id=\"2\" type=\"string\"/>"  + System.lineSeparator() +
                     "  <name>text</name>"  + System.lineSeparator() +
-            "</root>";
+            "</root>" + System.lineSeparator();
 
-    @Before
-    public void setUp() {
-        xmlMapper.enable(SerializationFeature.INDENT_OUTPUT).registerModule(new JaxbAnnotationModule());
-    }
-
-    @Ignore
-    @Test
-    public void serializeUnwrappedList () throws Exception {
-        // given
+    private Root givenRootObject() {
         Root rootObject = new Root();
 
         UnwrappedElement unwrapped1 = new UnwrappedElement();
@@ -80,22 +73,33 @@ public class UnwrappedAttributeTest {
         rootObject.unwrapped = Arrays.asList(unwrapped1, unwrapped2);
         rootObject.name = "text";
 
-        // then
-        assertThat(xmlMapper.writeValueAsString(rootObject)).isEqualTo(rootXml);
+        return rootObject;
     }
 
-    @Ignore
+    @Before
+    public void setUp() {
+        xmlMapper.enable(SerializationFeature.INDENT_OUTPUT).registerModule(new JaxbAnnotationModule());
+    }
+
+//    @Ignore
+    @Test
+    public void serializeUnwrappedList () throws Exception {
+        // then
+        assertThat(xmlMapper.writeValueAsString(givenRootObject())).isEqualTo(rootXml);
+    }
+
+//    @Ignore
     @Test
     public void deserializeUnwrappedList () throws Exception {
         // given
-        Root rootObject = new Root();
+        Root rootObject = givenRootObject();
 
         // when
         Root rootResult =  xmlMapper.readValue(rootXml, Root.class);
 
         // then
         assertThat(rootResult.name).isEqualTo(rootObject.name);
-        assertThat(rootResult.unwrapped).hasSize(1);
+        assertThat(rootResult.unwrapped).hasSize(2);
         assertThat(rootResult.unwrapped.get(0)).isEqualToComparingFieldByField(rootObject.unwrapped.get(0));
 
     }

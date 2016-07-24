@@ -23,16 +23,20 @@ See above badges for latest version to use. The table below give an indication o
 | 0.8.0-X          | 0.8.0          | 2.5.1     |    transitive    |
 | 0.8.1-X          | 0.8.1          | 2.5.2     |    transitive    |
 | 0.9.0-X          | 0.9.0          | 2.6.3     |    transitive    |
-| X                | user           | user      |    transitive    |
 
 After 0.9.0, the Dropwizard and Jackson dependencies are no longer bundled with this library. They are specified as 
-`compileOnly` scope (`runtime` scope in Maven) and it is up to you to specify the correct Dropwizard version and Jackson
-version combination. See [usage](#Usage) below fore more details.
+gradle `compileOnly` scope (`provided` scope in Maven). It is up to you to provide the correct Dropwizard version 
+and Jackson version combination in your classpath:
 
-### Known Issues:
-- Dropwizard 0.9.0+ uses Jackson 0.6.3+ which has brough back this error: https://github.com/FasterXML/jackson-dataformat-xml/issues/101 So don't use unwrapped lists followed by elements.
+| Dropwizard-XML   | Provide Dropwizard | Provide Jackson  | 
+| ---------------- | ------------------ | ---------------- |
+| 39               | 0.9.1, 0.9.2       | 2.6.3            | 
+| 39               | 0.9.3              | 2.6.7            |
+| 40+              | 1.0.0+             | 2.7.5+           |
 
-## Usage
+See [dependencies](#Dependencies) below fore more details.
+
+## Dependencies
 Dropwizard XML Provider is hosted by [Bintray JCenter](https://bintray.com/bintray/jcenter).
 
 You can add the dependency to your project by Maven:
@@ -49,31 +53,27 @@ You can add the dependency to your project by Maven:
         <version>${dropwizardXmlVersion}</version>
         <scope>compile</scope>
     </dependency>
+    
+    <!-- provided dependencies -->
     <dependency>
         <groupId>io.dropwizard</groupId>
         <artifactId>dropwizard-core</artifactId>
-        <version>0.9.3</version>
+        <version>1.0.0-rc4</version>
         <scope>compile</scope>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.jaxrs</groupId>
         <artifactId>jackson-jaxrs-xml-provider</artifactId>
-        <version>2.6.7</version>
+        <version>2.7.5</version>
         <scope>compile</scope>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.dataformat</groupId>
         <artifactId>jackson-dataformat-xml</artifactId>
-        <version>2.6.7</version>
+        <version>2.7.5</version>
         <scope>compile</scope>
     </dependency>
-    <dependency>
-        <groupId>com.fasterxml.jackson.datatype</groupId>
-        <artifactId>jackson-datatype-jdk7</artifactId>
-        <version>2.6.7</version>
-        <scope>compile</scope>
-    </dependency>
-
+    
 Or Gradle:
 
     repositories {
@@ -82,15 +82,28 @@ Or Gradle:
     }
     dependencies {
         compile "com.yunspace.dropwizard:dropwizard-xml:${dropwizardXmlVersion}"
-        compile "io.dropwizard:dropwizard-core:0.9.3"
-        compile "com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider:2.6.7"
-        compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.6.7"
-        compile "com.fasterxml.jackson.datatype:jackson-datatype-jdk7:2.6.7"
+        compile "io.dropwizard:dropwizard-core:1.0.0-rc4"
+        compile "com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider:2.7.5"
+        compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.7.5"
     }
     
-*Note* If you are using Dropwizard `1.0.0+` with Jackson `2.7.+`, you can drop the 
-the [deprecated jackson-datatype-jdk7](https://github.com/FasterXML/jackson-datatype-jdk7)
-        
+If you are using less than Dropwizard `1.0.0` and Jackson `2.7.5` you need to add [jackson-datatype-jdk7](https://github.com/FasterXML/jackson-datatype-jdk7)
+
+Maven: 
+
+    <dependency>
+        <groupId>com.fasterxml.jackson.datatype</groupId>
+        <artifactId>jackson-datatype-jdk7</artifactId>
+        <version>2.6.7</version>
+        <scope>compile</scope>
+    </dependency>
+
+Gradle:
+
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-jdk7:2.6.7"
+
+## Usage 
+
 Add the XMLBundle
 
     bootstrap.addBundle(new XmlBundle());
@@ -120,4 +133,7 @@ Or enable various serialisation/deserialisation features
     bootstrap.addBundle(indentXmlBundle);
 
 ##Sample project
-See dropwizard-xml-example subproject.
+See [dropwizard-xml-example](https://github.com/yunspace/dropwizard-xml/tree/master/dropwizard-xml-example) subproject.
+
+## TODO
+Add support for [aalto](https://github.com/FasterXML/aalto-xml)

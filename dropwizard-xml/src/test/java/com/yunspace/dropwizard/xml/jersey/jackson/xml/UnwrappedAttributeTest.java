@@ -1,9 +1,12 @@
 package com.yunspace.dropwizard.xml.jersey.jackson.xml;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import com.google.common.collect.Lists;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -24,59 +27,73 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UnwrappedAttributeTest {
 
     @JacksonXmlRootElement(localName = "root")
-    public static class Root {
+    private static class Root {
 
-        public Root() {}
+        Root() {}
 
         @JacksonXmlProperty
         @JacksonXmlElementWrapper(useWrapping = false)
-        public List<UnwrappedElement> unwrapped;
+        List<UnwrappedElement> unwrapped;
 
-        public String name;
+        String name;
 
     }
 
     @JacksonXmlRootElement(localName = "unwrapped")
-    public static class UnwrappedElement {
+    private static class UnwrappedElement {
 
         @JacksonXmlProperty(isAttribute = true)
-        public String id;
+        String id;
 
         @JacksonXmlProperty(isAttribute = true)
-        public String type;
+        String type;
 
     }
 
-    protected final XmlMapper xmlMapper = new XmlMapper();
-    protected final String rootXml =
+    private final XmlMapper xmlMapper = new XmlMapper();
+    private final String rootXml =
             "<root>"  + System.lineSeparator() +
                     "  <unwrapped id=\"1\" type=\"string\"/>"  + System.lineSeparator() +
+                    "  <unwrapped id=\"2\" type=\"string\"/>"  + System.lineSeparator() +
                     "  <name>text</name>"  + System.lineSeparator() +
             "</root>";
-
-    protected final Root rootObject = new Root();
 
     @Before
     public void setUp() {
         xmlMapper.enable(SerializationFeature.INDENT_OUTPUT).registerModule(new JaxbAnnotationModule());
-
-        UnwrappedElement unwrapped = new UnwrappedElement();
-        unwrapped.id="1";
-        unwrapped.type="string";
-        rootObject.unwrapped = Arrays.asList(unwrapped);
-        rootObject.name = "text";
     }
 
+    @Ignore
     @Test
-    public void serializeTest () throws Exception {
+    public void serializeUnwrappedList () throws Exception {
+        // given
+        Root rootObject = new Root();
+
+        UnwrappedElement unwrapped1 = new UnwrappedElement();
+        unwrapped1.id="1";
+        unwrapped1.type="string";
+
+        UnwrappedElement unwrapped2 = new UnwrappedElement();
+        unwrapped2.id="2";
+        unwrapped2.type="string";
+
+        rootObject.unwrapped = Arrays.asList(unwrapped1, unwrapped2);
+        rootObject.name = "text";
+
+        // then
         assertThat(xmlMapper.writeValueAsString(rootObject)).isEqualTo(rootXml);
     }
 
+    @Ignore
     @Test
-    public void derializeTest () throws Exception {
+    public void deserializeUnwrappedList () throws Exception {
+        // given
+        Root rootObject = new Root();
 
+        // when
         Root rootResult =  xmlMapper.readValue(rootXml, Root.class);
 
+        // then
         assertThat(rootResult.name).isEqualTo(rootObject.name);
         assertThat(rootResult.unwrapped).hasSize(1);
         assertThat(rootResult.unwrapped.get(0)).isEqualToComparingFieldByField(rootObject.unwrapped.get(0));

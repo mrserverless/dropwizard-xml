@@ -1,6 +1,6 @@
 plugins {
     id 'maven-publish'
-    id "com.jfrog.bintray" version "1.0"
+    id "com.jfrog.bintray" version "1.7.1"
 }
 
 dependencies {
@@ -52,8 +52,8 @@ publishing {
 }
 
 bintray {
-    user = bintrayUser
-    key = bintrayApiKey
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
 
     publications = ['mavenJava'] //When uploading Maven-based publication files
 

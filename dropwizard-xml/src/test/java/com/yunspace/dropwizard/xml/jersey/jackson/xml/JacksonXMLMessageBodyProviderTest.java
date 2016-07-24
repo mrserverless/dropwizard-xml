@@ -43,17 +43,17 @@ import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 public class JacksonXMLMessageBodyProviderTest {
     private static final Annotation[] NONE = new Annotation[0];
 
-    public static class Example {
+    private static class Example {
         @Min(0)
         @JacksonXmlProperty
         int id;
     }
 
-    public interface Partial1 {}
+    interface Partial1 {}
 
-    public interface Partial2 {}
+    interface Partial2 {}
 
-    public static class PartialExample {
+    private static class PartialExample {
         @Min(value = 0, groups = Partial1.class)
         @JacksonXmlProperty
         int id;
@@ -65,9 +65,8 @@ public class JacksonXMLMessageBodyProviderTest {
 
     //tests wrapped and unwrapped lists, to verify jackson-dataformat-xml
     //<a href="https://github.com/FasterXML/jackson-dataformat-xml/issues/58">Issue 58</a>
-    public static class ListExample {
+    private static class ListExample {
 
-        @JacksonXmlElementWrapper(useWrapping = true)
         @JacksonXmlProperty(localName = "wrappedList")
         List<String> wrappedList;
 
@@ -88,7 +87,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 + "</ListExample>";
     }
 
-    public static class AttributeExample {
+    private static class AttributeExample {
 
         @JacksonXmlProperty(isAttribute = true)
         String version;
@@ -96,7 +95,7 @@ public class JacksonXMLMessageBodyProviderTest {
     }
 
     @JacksonXmlRootElement(localName = "NamespaceAndText", namespace = "lostInSpace")
-    public static class NamespaceLocalNameExample {
+    private static class NamespaceLocalNameExample {
 
         @JacksonXmlText
         @JacksonXmlElementWrapper(localName = "TextValue")
@@ -104,12 +103,12 @@ public class JacksonXMLMessageBodyProviderTest {
     }
 
     @JsonIgnoreType(false)
-    public static interface NonIgnorable extends Ignorable {
+    interface NonIgnorable extends Ignorable {
 
     }
 
     @JsonIgnoreType
-    public static interface Ignorable {
+    interface Ignorable {
 
     }
 
@@ -175,7 +174,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 Example.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedHashMap<String, String>(),
+                new MultivaluedHashMap<>(),
                 entity);
 
         assertThat(obj)
@@ -196,7 +195,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 ListExample.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedHashMap<String, String>(),
+                new MultivaluedHashMap<>(),
                 requestList);
 
         assertThat(obj)
@@ -220,7 +219,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 AttributeExample.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedHashMap<String, String>(),
+                new MultivaluedHashMap<>(),
                 entity);
 
         assertThat(obj)
@@ -234,7 +233,7 @@ public class JacksonXMLMessageBodyProviderTest {
     public void returnsPartialValidatedRequestEntities() throws Exception {
         final Validated valid = Mockito.mock(Validated.class);
         Mockito.doReturn(Validated.class).when(valid).annotationType();
-        Mockito.when(valid.value()).thenReturn(new Class<?>[] {Partial1.class, Partial2.class});
+        Mockito.when(valid.value()).thenReturn(new Class[] {Partial1.class, Partial2.class});
 
         final ByteArrayInputStream entity =
                 new ByteArrayInputStream("<PartialExample xmlns=\"\"><id>1</id><text>hello Cemo</text></PartialExample>".getBytes());
@@ -244,7 +243,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 PartialExample.class,
                 new Annotation[] {valid},
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedHashMap<String, String>(),
+                new MultivaluedHashMap<>(),
                 entity);
 
         assertThat(obj)
@@ -258,7 +257,7 @@ public class JacksonXMLMessageBodyProviderTest {
     public void returnsPartialValidatedByGroupRequestEntities() throws Exception {
         final Validated valid = Mockito.mock(Validated.class);
         Mockito.doReturn(Validated.class).when(valid).annotationType();
-        Mockito.when(valid.value()).thenReturn(new Class<?>[] {Partial1.class});
+        Mockito.when(valid.value()).thenReturn(new Class[] {Partial1.class});
 
         final ByteArrayInputStream entity = new ByteArrayInputStream("<Example xmlns=\"\"><id>1</id></Example>".getBytes());
         final Class<?> klass = PartialExample.class;
@@ -267,7 +266,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 PartialExample.class,
                 new Annotation[] {valid},
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedHashMap<String, String>(),
+                new MultivaluedHashMap<>(),
                 entity);
 
         assertThat(obj)
@@ -281,7 +280,7 @@ public class JacksonXMLMessageBodyProviderTest {
     public void throwsAnInvalidEntityExceptionForPartialValidatedRequestEntities() throws Exception {
         final Validated valid = Mockito.mock(Validated.class);
         Mockito.doReturn(Validated.class).when(valid).annotationType();
-        Mockito.when(valid.value()).thenReturn(new Class<?>[] {Partial1.class, Partial2.class});
+        Mockito.when(valid.value()).thenReturn(new Class[] {Partial1.class, Partial2.class});
 
         final ByteArrayInputStream entity = new ByteArrayInputStream("<Example xmlns=\"\"><id>1</id></Example>".getBytes());
 
@@ -291,7 +290,7 @@ public class JacksonXMLMessageBodyProviderTest {
                     PartialExample.class,
                     new Annotation[] {valid},
                     MediaType.APPLICATION_XML_TYPE,
-                    new MultivaluedHashMap<String, String>(),
+                    new MultivaluedHashMap<>(),
                     entity);
             failBecauseExceptionWasNotThrown(ConstraintViolationException.class);
         } catch (ConstraintViolationException e) {
@@ -312,7 +311,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 Example.class,
                 new Annotation[] {valid},
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedHashMap<String, String>(),
+                new MultivaluedHashMap<>(),
                 entity);
 
         assertThat(obj)
@@ -335,7 +334,7 @@ public class JacksonXMLMessageBodyProviderTest {
                     Example.class,
                     new Annotation[] {valid},
                     MediaType.APPLICATION_XML_TYPE,
-                    new MultivaluedHashMap<String, String>(),
+                    new MultivaluedHashMap<>(),
                     entity);
             failBecauseExceptionWasNotThrown(ConstraintViolationException.class);
         } catch (ConstraintViolationException e) {
@@ -354,12 +353,12 @@ public class JacksonXMLMessageBodyProviderTest {
                     Example.class,
                     NONE,
                     MediaType.APPLICATION_XML_TYPE,
-                    new MultivaluedHashMap<String, String>(),
+                    new MultivaluedHashMap<>(),
                     entity);
             failBecauseExceptionWasNotThrown(WebApplicationException.class);
         } catch (JsonProcessingException e) {
             assertThat(e.getMessage())
-                    .startsWith("Can not construct instance of java.lang.Integer from String value '-1d': " +
+                    .startsWith("Can not construct instance of int from String value '-1d': " +
                             "not a valid Integer value");
 
         }
@@ -377,7 +376,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 Example.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedHashMap<String, Object>(),
+                new MultivaluedHashMap<>(),
                 output);
 
         assertThat(output.toString())
@@ -400,7 +399,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 ListExample.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedHashMap<String, Object>(),
+                new MultivaluedHashMap<>(),
                 output);
 
         assertThat(output.toString())
@@ -420,7 +419,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 AttributeExample.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedHashMap<String, Object>(),
+                new MultivaluedHashMap<>(),
                 output);
 
         assertThat(output.toString())
@@ -439,7 +438,7 @@ public class JacksonXMLMessageBodyProviderTest {
                 NamespaceLocalNameExample.class,
                 NONE,
                 MediaType.APPLICATION_XML_TYPE,
-                new MultivaluedHashMap<String, Object>(),
+                new MultivaluedHashMap<>(),
                 output);
 
         assertThat(output.toString())

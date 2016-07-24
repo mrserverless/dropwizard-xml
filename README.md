@@ -1,6 +1,5 @@
 # Dropwizard XML Bundle
 
-[![Join the chat at https://gitter.im/yunspace/dropwizard-xml](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/yunspace/dropwizard-xml?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://snap-ci.com/yunspace/dropwizard-xml/branch/master/build_image)](https://snap-ci.com/yunspace/dropwizard-xml/branch/master)
 [![Download](https://api.bintray.com/packages/yunspace/dropwizard/dropwizard-xml/images/download.svg)](https://bintray.com/yunspace/dropwizard/dropwizard-xml/_latestVersion)
 <a href='https://bintray.com/yunspace/dropwizard/dropwizard-xml/view?source=watch' alt='Get automatic notifications about new "dropwizard-xml" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_color.png'></a>
@@ -22,7 +21,11 @@ Versions are pegged against Dropwizard's release number and try to use the same 
 | 0.7.1-X          | 0.7.1          | 2.3.3     | 4.1.4    | 3.1.1 |
 | 0.8.0-X          | 0.8.0          | 2.5.1     |    transitive    |
 | 0.8.1-X          | 0.8.1          | 2.5.2     |    transitive    |
-| 0.9.0-X          | 0.9.0-SNAPSHOT | 2.5.3     |    transitive    |
+| 0.9.0-X          | 0.9.0          | 2.6.3     |    transitive    |
+
+Known Issues:
+- Dropwizard 0.9.0+ uses Jackson 0.6.3+ which has brough back this error: https://github.com/FasterXML/jackson-dataformat-xml/issues/101 So don't use unwrapped lists followed by elements.
+
 
 ## Usage
 Dropwizard XML Provider is hosted by [Bintray JCenter](https://bintray.com/bintray/jcenter).

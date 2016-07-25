@@ -4,6 +4,8 @@
 [![Download](https://api.bintray.com/packages/yunspace/dropwizard/dropwizard-xml/images/download.svg)](https://bintray.com/yunspace/dropwizard/dropwizard-xml/_latestVersion)
 <a href='https://bintray.com/yunspace/dropwizard/dropwizard-xml/view?source=watch' alt='Get automatic notifications about new "dropwizard-xml" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_color.png'></a>
 
+Coded with using IntelliJ IDEA Ultimate ![IntelliJ IDEA Ultimate](images/icon_IntelliJIDEA.png) 
+
 [Dropwizard](https://github.com/dropwizard/dropwizard) extension for high performance processing and validation of XML.
 
 Uses:

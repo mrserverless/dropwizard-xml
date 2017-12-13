@@ -12,7 +12,6 @@ import io.dropwizard.jackson.AnnotationSensitivePropertyNamingStrategy;
 import io.dropwizard.jackson.DiscoverableSubtypeResolver;
 import io.dropwizard.jackson.FuzzyEnumModule;
 import io.dropwizard.jackson.GuavaExtrasModule;
-import io.dropwizard.jackson.LogbackModule;
 
 public class JacksonXML {
     private JacksonXML() { /* singleton */ }
@@ -35,7 +34,6 @@ public class JacksonXML {
         final XmlMapper mapper = new XmlMapper(woodstoxFactory, jacksonXmlModule);
 
         mapper.registerModule(new GuavaModule());
-        mapper.registerModule(new LogbackModule());
         mapper.registerModule(new GuavaExtrasModule());
         mapper.registerModule(new JodaModule());
         mapper.registerModule(new FuzzyEnumModule());
